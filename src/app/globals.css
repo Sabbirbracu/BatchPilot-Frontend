@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* BatchPilot brand (Blueprint §3): white-first UI, royal purple for primary,
+   gold sparingly for success, red ONLY for dues and errors. */
+:root {
+  --bp-purple: #5b21b6;
+  --bp-purple-deep: #4a1a94;
+  --bp-purple-night: #2e1065;
+  --bp-lavender: #f4eeff;
+  --bp-gold: #f5b800;
+  --bp-gold-cream: #fff7db;
+  --bp-gold-ink: #7a5800;
+  --bp-red: #e11d48;
+  --bp-red-soft: #fff1f3;
+  --bp-ink: #17161f;
+  --bp-muted: #6b6878;
+  --bp-canvas: #f6f5fa;
+  --bp-card: #ffffff;
+  --bp-border: #eeedf3;
+  --bp-green: #15803d;
+  --bp-green-bright: #22c55e;
+  --bp-green-soft: #e9f8ef;
+  --bp-blue: #4f6bed;
+  --bp-blue-soft: #eef1ff;
+  --bp-violet: #7c3aed;
+}
+
+@theme inline {
+  --color-purple: var(--bp-purple);
+  --color-purple-deep: var(--bp-purple-deep);
+  --color-purple-night: var(--bp-purple-night);
+  --color-lavender: var(--bp-lavender);
+  --color-gold: var(--bp-gold);
+  --color-gold-cream: var(--bp-gold-cream);
+  --color-gold-ink: var(--bp-gold-ink);
+  --color-due: var(--bp-red);
+  --color-due-soft: var(--bp-red-soft);
+  --color-ink: var(--bp-ink);
+  --color-muted: var(--bp-muted);
+  --color-canvas: var(--bp-canvas);
+  --color-card: var(--bp-card);
+  --color-line: var(--bp-border);
+  --color-ok: var(--bp-green);
+  --color-ok-bright: var(--bp-green-bright);
+  --color-ok-soft: var(--bp-green-soft);
+  --color-info: var(--bp-blue);
+  --color-info-soft: var(--bp-blue-soft);
+  --color-violet: var(--bp-violet);
+  --font-sans: var(--font-hind), var(--font-sora), system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-hind), system-ui, sans-serif;
+  --radius-card: 12px;
+  --radius-panel: 22px;
+  --shadow-soft: 0 1px 2px rgb(23 22 31 / 0.03), 0 10px 30px -18px rgb(46 16 101 / 0.18);
+  --shadow-hero: 0 24px 48px -24px rgb(76 29 149 / 0.55);
+  --animate-rise: rise 0.22s ease-out;
+  --animate-sheet: sheet 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-fade: fade 0.2s ease-out;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes sheet {
+    from { transform: translateY(100%); }
+    to { transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+html,
+body {
+  background: var(--bp-canvas);
+  color: var(--bp-ink);
+}
+
+body {
+  font-family: var(--font-hind), var(--font-sora), system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Numbers and taka amounts use Sora (Blueprint: fonts). */
+.num {
+  font-family: var(--font-sora), system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Horizontal scrollers (chips, tabs) keep touch scrolling but hide the bar. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,6 @@
+/* Green "device is online" pulse used by the status dots on this page (bp- prefix: global CSS). */
+@keyframes bp-device-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(18, 183, 106, 0.55); }
+  70% { box-shadow: 0 0 0 8px rgba(18, 183, 106, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(18, 183, 106, 0); }
+}
