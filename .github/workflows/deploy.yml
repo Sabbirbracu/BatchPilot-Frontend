@@ -1,0 +1,115 @@
+name: Deploy web
+
+# Pull requests only run the checks. A push to main (or a manual run from the
+# Actions tab, handy for re-deploying) builds the image and ships ONLY the web
+# container; the API and the database are never touched by this pipeline.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-web-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  # Must be lowercase: Docker rejects uppercase letters in image names.
+  IMAGE: ghcr.io/sabbirbracu/batchpilot-web
+  APP_DIR: /opt/batchpilot
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      # Source only: a stray build folder must not be linted.
+      - run: npx eslint src
+
+  build-and-push:
+    needs: check
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          # sha = a permanent tag you can roll back to; latest = convenience.
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Set up SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          # The server's identity is pinned in a secret, so we only ever talk to the real server.
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Pull the new image and restart the web container
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTOR: ${{ github.actor }}
+          SHA: ${{ github.sha }}
+        run: |
+          SSH="ssh -i $HOME/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes $DEPLOY_USER@$DEPLOY_HOST"
+          # A private Docker config folder for this app, so our short-lived GHCR login
+          # never overwrites the logins other deployments keep in ~/.docker.
+          printf '%s' "$GHCR_TOKEN" | $SSH "export DOCKER_CONFIG=$APP_DIR/.docker && docker login ghcr.io -u $ACTOR --password-stdin"
+          # `pull web` + `up --no-deps web` touch ONLY this container (never the db or the api).
+          $SSH "export DOCKER_CONFIG=$APP_DIR/.docker WEB_TAG=$SHA && cd $APP_DIR && docker compose pull web && docker compose up -d --no-deps web && docker image prune -f"
+
+      - name: Wait until the container is healthy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            "$DEPLOY_USER@$DEPLOY_HOST" bash -s <<'REMOTE'
+          for i in $(seq 1 30); do
+            s=$(docker inspect -f '{{.State.Health.Status}}' batchpilot-web 2>/dev/null || true)
+            if [ "$s" = "healthy" ]; then echo "healthy after ${i} checks"; exit 0; fi
+            sleep 3
+          done
+          echo "batchpilot-web did not become healthy"; docker logs --tail 40 batchpilot-web; exit 1
+          REMOTE
+
+      # Only runs once you set the SITE_URL variable (after DNS + HTTPS work).
+      - name: Check the live site
+        if: ${{ vars.SITE_URL != '' }}
+        run: |
+          curl --fail --silent --show-error --retry 5 --retry-delay 5 \
+            -o /dev/null "${{ vars.SITE_URL }}/login"

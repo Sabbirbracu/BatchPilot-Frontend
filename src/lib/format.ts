@@ -74,6 +74,14 @@ export function monthLabel(isoDate: string, lang: Lang, withYear = false): strin
   return withYear ? `${name} ${digits(y, lang)}` : name;
 }
 
+const BN_MONTHS_SHORT = ["জানু", "ফেব্রু", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টে", "অক্টো", "নভে", "ডিসে"];
+
+/** "২ অক্টো" / "2 Oct" — for tight rows. */
+export function dateShort(iso: string, lang: Lang): string {
+  const d = new Date(iso.length === 10 ? iso + "T00:00:00" : iso);
+  return `${digits(d.getDate(), lang)} ${lang === "bn" ? BN_MONTHS_SHORT[d.getMonth()] : EN_MONTHS[d.getMonth()]}`;
+}
+
 export function dateLabel(iso: string, lang: Lang): string {
   const d = new Date(iso.length === 10 ? iso + "T00:00:00" : iso);
   const day = digits(d.getDate(), lang);
@@ -126,4 +134,12 @@ export function phoneLabel(e164: string | null | undefined, lang: Lang = "en"): 
 export function todayISO(): string {
   // Business day is Asia/Dhaka.
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Dhaka" }).format(new Date());
+}
+
+/** Bangla month name with a case ending: অক্টোবরে / অক্টোবরের, জানুয়ারিতে / জানুয়ারির, মে মাসে. */
+export function monthCase(name: string, kind: "in" | "of"): string {
+  if (name === "মে") return kind === "in" ? "মে মাসে" : "মে মাসের";
+  if (name.endsWith("ি")) return name + (kind === "in" ? "তে" : "র");
+  if (name.endsWith("ই")) return name + (kind === "in" ? "য়ে" : "য়ের");
+  return name + (kind === "in" ? "ে" : "ের");
 }

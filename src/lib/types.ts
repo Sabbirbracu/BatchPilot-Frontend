@@ -51,6 +51,9 @@ export type Batch = {
   month_due: number;
   today_present: number | null;
   today_absent: number | null;
+  due_students: number;
+  month_attendance: number | null;
+  last_month_attendance: number | null;
 };
 
 export type Student = {
@@ -71,8 +74,12 @@ export type Student = {
   version: number;
   outstanding: number;
   due_months: number;
+  partial: boolean;
   batch_names: string[];
+  month_attendance: number | null;
 };
+
+export type StudentSummary = { active: number; joined_this_month: number; with_due: number; left: number };
 
 export type StudentPage = { items: Student[]; next_cursor: string | null; total: number };
 
@@ -119,6 +126,19 @@ export type Payment = {
   reversed: boolean;
   reversal_reason: string | null;
   months: string[];
+  batch_names: string[];
+};
+
+export type FeeOverview = {
+  month: string;
+  collected: number;
+  billed: number;
+  today_amount: number;
+  today_count: number;
+  today_receipts: number;
+  total_due: number;
+  due_students: number;
+  by_method: Partial<Record<PaymentMethod, number>>;
 };
 
 export type Ledger = { student_id: string; outstanding: number; advance: number; dues: Due[]; payments: Payment[] };
@@ -243,6 +263,7 @@ export type Message = {
   id: string;
   student_id: string | null;
   student_name: string | null;
+  guardian_name: string | null;
   to_phone: string;
   template_key: string;
   body: string;
@@ -253,7 +274,46 @@ export type Message = {
   created_at: string;
 };
 
-export type Template = { key: string; body_bn: string; body_en: string | null; is_enabled: boolean; segments: number };
+export type Template = {
+  key: string;
+  name: string | null;
+  kind: "auto" | "notice";
+  body_bn: string;
+  body_en: string | null;
+  default_bn: string | null;
+  is_enabled: boolean;
+  segments: number;
+};
+
+export type MessageKind = "attendance" | "receipt" | "reminder" | "notice" | "welcome" | "failed";
+
+export type MessageOverview = {
+  month: string;
+  sent: number;
+  guardians: number;
+  segments: number;
+  reached: number;
+  queued: number;
+  failed: number;
+  gateway_connected: boolean;
+  scheduled_notices: number;
+  counts: Record<MessageKind, number>;
+};
+
+export type NoticeAudience = { all: boolean; batch_ids: string[]; student_ids: string[] };
+export type AudienceCount = { students: number; guardians: number; missing_phone: number };
+
+export type NoticeRecord = {
+  id: string;
+  title: string | null;
+  message: string;
+  targets: string[];
+  students: number;
+  queued: number;
+  created_at: string;
+  send_at: string | null;
+  pending: boolean;
+};
 
 export type Member = {
   id: string;
@@ -287,3 +347,15 @@ export type ChildSummary = {
 };
 
 export type FamilyDashboardData = { institution_name: string; bkash_number: string | null; children: ChildSummary[] };
+
+export type BatchMember = {
+  student_id: string;
+  roll_no: string;
+  name: string;
+  guardian_phone: string | null;
+  month_amount: number;
+  month_paid: number;
+  month_status: "due" | "partial" | "paid" | "waived" | null;
+  outstanding: number;
+  attendance: number | null;
+};

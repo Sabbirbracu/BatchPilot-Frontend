@@ -4,11 +4,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Button, Card, ErrorBox, Field, Input, PageHeader, PageLoader, Select, Toggle } from "@/components/ui";
 import { api } from "@/lib/api";
-import { ME_KEY, useMe } from "@/lib/auth";
+import { useMe } from "@/lib/auth";
 import { monthLabel, phoneLabel } from "@/lib/format";
 import { useTodayISO } from "@/lib/clock";
 import { useLang } from "@/lib/i18n";
-import type { Institution, Me, Member } from "@/lib/types";
+import { useSaveInstitution } from "@/lib/institution";
+import type { Institution, Member } from "@/lib/types";
 
 export default function SettingsPage() {
   const { tr } = useLang();
@@ -26,13 +27,6 @@ export default function SettingsPage() {
   );
 }
 
-function useSaveInstitution() {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: (body: Record<string, unknown>) => api<Institution>("/institutions/current", { method: "PATCH", body }),
-    onSuccess: (inst) => qc.setQueryData<Me>(ME_KEY, (old) => (old ? { ...old, institution: inst } : old)),
-  });
-}
 
 function InstitutionCard({ inst }: { inst: Institution }) {
   const { tr } = useLang();

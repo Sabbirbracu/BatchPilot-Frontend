@@ -1,0 +1,12 @@
+node_modules
+.next
+.next-verify
+.git
+.github
+.claude
+.env*
+*.tsbuildinfo
+Dockerfile
+.dockerignore
+README.md
+.DS_Store

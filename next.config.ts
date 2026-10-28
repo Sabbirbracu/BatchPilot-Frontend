@@ -7,6 +7,9 @@ const API_ORIGIN = process.env.API_ORIGIN ?? "http://localhost:8000";
 const nextConfig: NextConfig = {
   // Lets a second dev server run beside the main one (e.g. against another API port).
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  // Emits a minimal self-contained server (<distDir>/standalone) so the Docker image
+  // ships only what it needs instead of the whole node_modules folder.
+  output: "standalone",
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

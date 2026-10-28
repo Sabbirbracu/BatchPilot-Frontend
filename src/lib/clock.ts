@@ -33,3 +33,15 @@ function dhakaMinutes(): number {
 export function useDhakaMinutes(): number | null {
   return useSyncExternalStore(subscribeMinute, dhakaMinutes, () => null);
 }
+
+/**
+ * False on the server and during hydration, true afterwards. Pages that read the user or
+ * cached queries wait for it so their first client render matches the server HTML.
+ */
+export function useHydrated(): boolean {
+  return useSyncExternalStore(
+    noSubscribe,
+    () => true,
+    () => false,
+  );
+}

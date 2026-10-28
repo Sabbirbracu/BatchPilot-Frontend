@@ -47,7 +47,7 @@ export const ACTIONS: Record<ActionId, QuickAction> = {
     long: ["ডায়েরির ছবি ইমপোর্ট", "Import diary photo"],
   },
   marks: { id: "marks", icon: FileText, tone: "purple", label: ["পরীক্ষার নম্বর", "Exam marks"], short: ["নম্বর তুলুন", "Marks"] },
-  notice: { id: "notice", icon: Volume1, tone: "blue", label: ["নোটিশ পাঠান", "Send notice"], href: "/messages" },
+  notice: { id: "notice", icon: Volume1, tone: "blue", label: ["নোটিশ পাঠান", "Send notice"], href: "/notices" },
   reminder: { id: "reminder", icon: MessageSquareWarning, tone: "red", label: ["বকেয়া রিমাইন্ডার", "Due reminder"], href: "/fees/dues" },
 };
 

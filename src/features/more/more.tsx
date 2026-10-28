@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, ChevronRight, LogOut, MessageSquareText, ReceiptText, Settings, Wallet } from "lucide-react";
+import { BookOpen, ChevronRight, LayoutTemplate, LogOut, Megaphone, MessageSquareText, ReceiptText, Settings, Wallet } from "lucide-react";
 import Link from "next/link";
 import { Card, PageHeader } from "@/components/ui";
 import { can, useLogout, useMe } from "@/lib/auth";
@@ -16,7 +16,9 @@ export default function MorePage() {
     { href: "/fees/dues", icon: Wallet, label: tr("বকেয়া তালিকা", "Dues") },
     { href: "/fees/payments", icon: ReceiptText, label: tr("আদায়ের হিসাব", "Payments") },
     { href: "/batches", icon: BookOpen, label: tr("ব্যাচ", "Batches") },
-    { href: "/messages", icon: MessageSquareText, label: tr("মেসেজ ও নোটিশ", "Messages") },
+    { href: "/messages", icon: MessageSquareText, label: tr("SMS", "SMS") },
+    { href: "/messages/templates", icon: LayoutTemplate, label: tr("টেমপ্লেট", "Templates") },
+    { href: "/notices", icon: Megaphone, label: tr("নোটিশ", "Notices") },
     ...(can(me, "settings.manage") ? [{ href: "/settings", icon: Settings, label: tr("সেটিংস", "Settings") }] : []),
   ];
   return (
