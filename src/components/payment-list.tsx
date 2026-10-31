@@ -15,6 +15,13 @@ import type { Payment } from "@/lib/types";
 
 const REVERSE_WINDOW_MS = 10 * 60 * 1000;
 
+/** Owners reverse any payment; an assistant only their own, within ten minutes. */
+export function canReversePayment(p: Payment, me: ReturnType<typeof useMe>["data"], now: number): boolean {
+  if (p.kind !== "payment" || p.reversed || !me) return false;
+  if (can(me, "payment.reverse_any")) return true;
+  return p.received_by === me.user.id && now - new Date(p.received_at).getTime() < REVERSE_WINDOW_MS;
+}
+
 export function PaymentList({ payments, showStudent = true }: { payments: Payment[]; showStudent?: boolean }) {
   const { tr, lang } = useLang();
   const { data: me } = useMe();
@@ -33,11 +40,7 @@ export function PaymentList({ payments, showStudent = true }: { payments: Paymen
     bank: tr("ব্যাংক", "Bank"),
   };
 
-  function canReverse(p: Payment) {
-    if (p.kind !== "payment" || p.reversed || !me) return false;
-    if (can(me, "payment.reverse_any")) return true;
-    return p.received_by === me.user.id && now - new Date(p.received_at).getTime() < REVERSE_WINDOW_MS;
-  }
+  const canReverse = (p: Payment) => canReversePayment(p, me, now);
 
   return (
     <>
@@ -47,7 +50,7 @@ export function PaymentList({ payments, showStudent = true }: { payments: Paymen
             <div className="min-w-0 flex-1">
               {showStudent ? (
                 <Link href={to(`/students/${p.student_id}`)} className="block truncate font-semibold">
-                  {p.student_name} <span className="text-xs font-normal text-muted">· {tr("রোল", "Roll")} {digits(p.roll_no, lang)}</span>
+                  {p.student_name} <span className="text-xs font-normal text-muted">· {tr("আইডি", "ID")} {digits(p.student_code, lang)}</span>
                 </Link>
               ) : (
                 <div className="font-semibold">{p.months.map((m) => monthLabel(m, lang)).join(", ") || "—"}</div>
@@ -76,7 +79,8 @@ export function PaymentList({ payments, showStudent = true }: { payments: Paymen
   );
 }
 
-function ReverseDialog({ payment, onClose }: { payment: Payment; onClose: () => void }) {
+/** Reverse a payment: nothing is deleted, a reversal entry is added. Also used by the student profile. */
+export function ReverseDialog({ payment, onClose }: { payment: Payment; onClose: () => void }) {
   const { tr, lang } = useLang();
   const qc = useQueryClient();
   const [reason, setReason] = useState("");

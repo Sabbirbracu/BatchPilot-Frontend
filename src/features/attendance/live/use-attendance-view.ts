@@ -88,7 +88,7 @@ function toDetail(r: Roster): BatchDetail {
   const taken = !!r.session_id;
   const marks = r.items.map((i) => ({
     id: i.student_id,
-    roll: digits(i.roll_no, "bn"),
+    code: digits(i.student_code, "bn"),
     name: i.name,
     status: taken ? i.status : ("absent" as const),
     time: null,

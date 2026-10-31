@@ -63,7 +63,7 @@ export function DetailHeader({
           <MoreMenu items={menu} label={tr("আরো অপশন", "More options")} placement="down" className={`${whiteBtn} w-[42px] text-[18px] font-bold text-[#6B6880]`} />
         )}
         {canAddStudent && !closed && (
-          <PrimaryLink href={to(`/students/new?batch=${b.id}`)}>
+          <PrimaryLink href={to(`/admissions/new?batch=${b.id}`)}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
               <circle cx="10" cy="8" r="3.5" />
               <path d="M4 20a6 6 0 0 1 12 0M19 8v6M16 11h6" />

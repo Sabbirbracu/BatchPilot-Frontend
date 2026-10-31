@@ -70,7 +70,7 @@ function Dues() {
       />
 
       <div className="mb-4 grid gap-2 sm:grid-cols-3">
-        <Input placeholder={tr("নাম বা রোল খুঁজুন", "Search name or roll")} value={q} onChange={(e) => setQ(e.target.value)} />
+        <Input placeholder={tr("নাম বা আইডি খুঁজুন", "Search name or ID")} value={q} onChange={(e) => setQ(e.target.value)} />
         <Select value={batchId} onChange={(e) => setBatchId(e.target.value)}>
           <option value="">{tr("সব ব্যাচ", "All batches")}</option>
           {batches.data?.map((b) => (
@@ -135,7 +135,7 @@ function Dues() {
               <Link href={to(`/students/${s.student_id}`)} className="min-w-0 flex-1">
                 <div className="truncate font-semibold">{s.name}</div>
                 <div className="truncate text-xs text-muted">
-                  {tr("রোল", "Roll")} {digits(s.roll_no, lang)} · {s.batch_names.join(", ")} ·{" "}
+                  {tr("আইডি", "ID")} {digits(s.student_code, lang)} · {s.batch_names.join(", ")} ·{" "}
                   {tr(`${monthLabel(s.oldest_month, lang)} থেকে`, `since ${monthLabel(s.oldest_month, lang)}`)}
                   {s.last_payment_at && ` · ${tr("শেষ পেমেন্ট", "last paid")} ${dateLabel(s.last_payment_at, lang)}`}
                 </div>

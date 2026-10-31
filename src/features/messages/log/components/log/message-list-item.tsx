@@ -1,8 +1,8 @@
 import { useLang } from "@/lib/i18n";
 import type { Message } from "@/lib/types";
 import { recipient, whenLabel } from "../../lib/message-meta";
-import { KindPill } from "./kind-pill";
-import { StatusPill } from "./status-pill";
+import { KindPill } from "@/features/shared/messages/kind-pill";
+import { SmsStatusPill } from "@/features/shared/messages/sms-status-pill";
 
 /** Phone version of a log row. */
 export function MessageListItem({ message: m }: { message: Message }) {
@@ -19,7 +19,7 @@ export function MessageListItem({ message: m }: { message: Message }) {
       <p className="m-0 my-1 line-clamp-2 text-[12.5px] text-[#3B3850]">{m.body}</p>
       <div className="flex items-center justify-between gap-2">
         <KindPill templateKey={m.template_key} />
-        <StatusPill status={m.status} />
+        <SmsStatusPill status={m.status} />
       </div>
     </li>
   );

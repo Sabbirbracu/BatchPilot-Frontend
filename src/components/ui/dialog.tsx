@@ -7,11 +7,13 @@ export function Dialog({
   open,
   onClose,
   title,
+  size = "md",
   children,
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
+  size?: "md" | "lg"; // lg for forms with a fee panel
   children: React.ReactNode;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -25,7 +27,7 @@ export function Dialog({
     <dialog
       ref={ref}
       onClose={onClose}
-      className="m-auto w-[calc(100%-32px)] max-w-md rounded-2xl border border-line bg-card p-0 text-ink backdrop:bg-ink/40"
+      className={`m-auto w-[calc(100%-32px)] ${size === "md" ? "max-w-md" : "max-w-2xl"} rounded-2xl border border-line bg-card p-0 text-ink backdrop:bg-ink/40`}
     >
       <div className="flex items-center justify-between border-b border-line px-5 py-4">
         <h2 className="font-bold">{title}</h2>

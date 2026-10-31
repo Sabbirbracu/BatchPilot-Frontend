@@ -7,7 +7,7 @@ import { StatusPill } from "./status-pill";
 import { StreakBadge } from "./streak-badge";
 import { StudentAvatar } from "./student-avatar";
 
-/** Phone/tablet roster row: who, roll · status, and a call button or the time they came. */
+/** Phone/tablet roster row: who, ID · status, and a call button or the time they came. */
 export function RosterListItem({ mark }: { mark: StudentMark }) {
   const absent = mark.status === "absent";
   return (
@@ -20,7 +20,7 @@ export function RosterListItem({ mark }: { mark: StudentMark }) {
           {mark.manual && <ManualBadge />}
         </div>
         <p className="m-0 truncate text-[13px] text-[#6B6880]">
-          রোল {mark.roll} ·{" "}
+          আইডি {mark.code} ·{" "}
           <span className={clsx(absent ? "font-semibold text-[#D92D20]" : mark.sms === "sent" ? "" : "text-[#6B6880]")}>
             {absent ? "আসেনি" : mark.sms === "sent" ? "✓ SMS গেছে" : "এসেছে"}
           </span>

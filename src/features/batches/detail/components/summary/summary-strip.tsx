@@ -5,7 +5,7 @@ import { type NextClass } from "../../../shared/schedule";
 import { collectionColor, collectionPct, seatColor } from "../../../shared/stats";
 import { attendanceText } from "@/features/shared/attendance";
 import { NextClassCard } from "./next-class-card";
-import { SummaryTile } from "./summary-tile";
+import { SummaryTile } from "@/features/shared/summary-tile";
 
 /** Next class + students, this month's collection, dues and attendance. */
 export function SummaryStrip({

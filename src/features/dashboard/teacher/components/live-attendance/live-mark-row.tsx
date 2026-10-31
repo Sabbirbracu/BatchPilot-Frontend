@@ -20,7 +20,7 @@ export function LiveMarkRow({ mark }: { mark: LiveMark }) {
   const to = usePortalPath();
   const l = look[mark.status];
   const status = {
-    present: `${tr(`রোল ${digits(mark.roll_no, lang)}`, `Roll ${mark.roll_no}`)} · ${mark.sms_sent ? tr("অভিভাবককে SMS গেছে", "guardian notified") : mark.batch_name}`,
+    present: `${tr(`আইডি ${digits(mark.student_code, lang)}`, `ID ${mark.student_code}`)} · ${mark.sms_sent ? tr("অভিভাবককে SMS গেছে", "guardian notified") : mark.batch_name}`,
     late: mark.late_minutes
       ? tr(`দেরিতে · ${digits(mark.late_minutes, lang)} মিনিট`, `Late · ${mark.late_minutes} min`)
       : `${tr("দেরিতে এসেছে", "Came late")} · ${mark.batch_name}`,

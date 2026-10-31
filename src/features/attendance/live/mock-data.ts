@@ -18,14 +18,14 @@ const BATCHES: BatchChipData[] = [
 const RED = { bg: "#FECDCA", fg: "#B42318" };
 
 const HSC_MARKS: StudentMark[] = [
-  { id: id(103), roll: "০৩", name: "তানভীর হাসান", initial: "ত", status: "absent", time: null, sms: "scheduled", streak: 3, monthRate: 62, phone: null, tone: RED },
-  { id: id(107), roll: "০৭", name: "তানিয়া আক্তার", initial: "ত", status: "present", time: "09:58", sms: "sent", monthRate: 96, phone: null, tone: { bg: "#FFD75E", fg: "#3B1782" } },
-  { id: id(111), roll: "১১", name: "সাকিব হোসেন", initial: "স", status: "late", time: "10:14", lateMinutes: 14, sms: "sent", monthRate: 84, phone: null, tone: { bg: "#C9B3FF", fg: "#3B1782" } },
-  { id: id(114), roll: "১৪", name: "নুসরাত জাহান", initial: "ন", status: "present", time: "09:55", sms: "sent", monthRate: 92, phone: null, tone: { bg: "#BFF0D6", fg: "#05603A" } },
-  { id: id(119), roll: "১৯", name: "রাফি আহমেদ", status: "absent", time: null, sms: "scheduled", monthRate: 78, phone: null, tone: RED },
-  { id: id(122), roll: "২২", name: "মিম আক্তার", status: "present", time: "09:59", sms: "sent", monthRate: 100, phone: null, tone: { bg: "#F4EEFF", fg: "#5B21B6" } },
-  { id: id(125), roll: "২৫", name: "আরিফ রহমান", initial: "আ", status: "present", time: "10:01", sms: "sent", monthRate: 88, phone: null, tone: { bg: "#EEF4FF", fg: "#3E63DD" } },
-  { id: id(128), roll: "২৮", name: "সাদিয়া ইসলাম", status: "present", time: "10:08", sms: "sent", manual: true, monthRate: 90, phone: null, tone: { bg: "#FFF7DB", fg: "#7A5800" } },
+  { id: id(103), code: "১০০১০৩", name: "তানভীর হাসান", initial: "ত", status: "absent", time: null, sms: "scheduled", streak: 3, monthRate: 62, phone: null, tone: RED },
+  { id: id(107), code: "১০০১০৭", name: "তানিয়া আক্তার", initial: "ত", status: "present", time: "09:58", sms: "sent", monthRate: 96, phone: null, tone: { bg: "#FFD75E", fg: "#3B1782" } },
+  { id: id(111), code: "১০০১১১", name: "সাকিব হোসেন", initial: "স", status: "late", time: "10:14", lateMinutes: 14, sms: "sent", monthRate: 84, phone: null, tone: { bg: "#C9B3FF", fg: "#3B1782" } },
+  { id: id(114), code: "১০০১১৪", name: "নুসরাত জাহান", initial: "ন", status: "present", time: "09:55", sms: "sent", monthRate: 92, phone: null, tone: { bg: "#BFF0D6", fg: "#05603A" } },
+  { id: id(119), code: "১০০১১৯", name: "রাফি আহমেদ", status: "absent", time: null, sms: "scheduled", monthRate: 78, phone: null, tone: RED },
+  { id: id(122), code: "১০০১২২", name: "মিম আক্তার", status: "present", time: "09:59", sms: "sent", monthRate: 100, phone: null, tone: { bg: "#F4EEFF", fg: "#5B21B6" } },
+  { id: id(125), code: "১০০১২৫", name: "আরিফ রহমান", initial: "আ", status: "present", time: "10:01", sms: "sent", monthRate: 88, phone: null, tone: { bg: "#EEF4FF", fg: "#3E63DD" } },
+  { id: id(128), code: "১০০১২৮", name: "সাদিয়া ইসলাম", status: "present", time: "10:08", sms: "sent", manual: true, monthRate: 90, phone: null, tone: { bg: "#FFF7DB", fg: "#7A5800" } },
 ];
 
 /** Finished morning batches get a short generated roster so every chip has something to show. */
@@ -39,7 +39,7 @@ function generated(b: BatchChipData): BatchDetail {
     const status = i < absent ? "absent" : "present";
     return {
       id: `${b.id}-${i}`,
-      roll: bn(i * 4 + 2),
+      code: bn(100000 + i * 4 + 2),
       name,
       status,
       time: status === "absent" ? null : `${b.start.slice(0, 2)}:${String(i * 3).padStart(2, "0")}`,

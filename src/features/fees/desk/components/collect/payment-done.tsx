@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PrimaryButton } from "@/components/ui";
-import { monthLabel, taka, timeShort } from "@/lib/format";
+import { duesLabel, taka, timeShort } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
 import { usePortalPath } from "@/lib/portal";
 import type { Receipt } from "@/lib/types";
@@ -16,7 +16,7 @@ export function PaymentDone({ receipt: r, onNext }: { receipt: Receipt; onNext: 
       : r.sms_status === "held"
         ? tr("রাত হয়ে গেছে — রশিদ SMS সকাল ৮টায় যাবে", "Quiet hours — receipt SMS goes at 8 am")
         : tr("রশিদ SMS যাবে না", "No receipt SMS");
-  const months = [...new Set(r.allocations.map((a) => a.month))].map((m) => monthLabel(m, lang)).join(", ");
+  const months = duesLabel(r.allocations, lang);
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-3 py-6 text-center">
       <span className="flex size-14 items-center justify-center rounded-full bg-[#ECFDF3] text-[#039855]">

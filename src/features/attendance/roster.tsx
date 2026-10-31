@@ -133,7 +133,7 @@ function RosterPageInner() {
                   isAbsent ? "bg-due text-white" : "bg-lavender text-purple-deep",
                 )}
               >
-                {digits(s.roll_no, lang)}
+                {digits(s.student_code, lang)}
               </span>
               <span className="min-w-0 flex-1">
                 <span className={clsx("block truncate font-medium", isAbsent && "text-due")}>{s.name}</span>

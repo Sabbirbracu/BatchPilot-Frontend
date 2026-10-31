@@ -41,7 +41,7 @@ export function CollectPanel({
         </span>
         <div className="min-w-0 flex-1">
           <h2 className="m-0 text-[18px] font-bold">{tr("ফি নিন", "Collect fee")}</h2>
-          <p className="m-0 text-[12.5px] text-[#6B6880]">{tr("নাম, রোল বা ফোন লিখুন — স্টুডেন্ট পেলেই বাকি মাসগুলো দেখাবে", "Type a name, roll or phone — the months due show up as soon as a student is found")}</p>
+          <p className="m-0 text-[12.5px] text-[#6B6880]">{tr("নাম, আইডি বা ফোন লিখুন — স্টুডেন্ট পেলেই বাকি মাসগুলো দেখাবে", "Type a name, ID or phone — the months due show up as soon as a student is found")}</p>
         </div>
       </div>
       {receipt ? (

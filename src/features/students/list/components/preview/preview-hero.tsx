@@ -8,7 +8,7 @@ import { avatarTone } from "../../lib/student-meta";
 
 export type TodayMark = "present" | "late" | "absent" | null;
 
-/** Purple band (roll · joining month · এডিট), then the big avatar, name and today's attendance. */
+/** Purple band (ID · joining month · এডিট), then the big avatar, name and today's attendance. */
 export function PreviewHero({ student: s, today, canEdit }: { student: Student; today: TodayMark; canEdit: boolean }) {
   const { tr, lang } = useLang();
   const to = usePortalPath();
@@ -25,7 +25,7 @@ export function PreviewHero({ student: s, today, canEdit }: { student: Student; 
       <div className="relative bg-[linear-gradient(135deg,#6D28D9,#3B1782)] px-4 pt-3.5 pb-11 text-white">
         <div className="flex justify-between gap-2 text-[12px] text-[#DCCFFB]">
           <span className="num truncate">
-            {tr("রোল", "Roll")} {digits(s.roll_no.padStart(2, "0"), lang)} · {tr("ভর্তি", "Joined")} {monthLabel(s.joined_at, lang, true)}
+            {tr("আইডি", "ID")} {digits(s.student_code, lang)} · {tr("ভর্তি", "Joined")} {monthLabel(s.joined_at, lang, true)}
           </span>
           {canEdit && (
             <Link href={to(`/students/${s.id}`)} className="font-bold text-white hover:text-white">

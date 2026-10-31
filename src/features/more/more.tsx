@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, ChevronRight, LayoutTemplate, LogOut, Megaphone, MessageSquareText, ReceiptText, Settings, Wallet } from "lucide-react";
+import { BookOpen, ChevronRight, LayoutTemplate, LogOut, Megaphone, MessageSquareText, ReceiptText, Settings, UserRoundPlus, Wallet } from "lucide-react";
 import Link from "next/link";
 import { Card, PageHeader } from "@/components/ui";
 import { can, useLogout, useMe } from "@/lib/auth";
@@ -13,6 +13,7 @@ export default function MorePage() {
   const logout = useLogout();
   const to = usePortalPath();
   const items = [
+    { href: "/admissions", icon: UserRoundPlus, label: tr("ভর্তি ও ভর্তির QR", "Admissions & QR") },
     { href: "/fees/dues", icon: Wallet, label: tr("বকেয়া তালিকা", "Dues") },
     { href: "/fees/payments", icon: ReceiptText, label: tr("আদায়ের হিসাব", "Payments") },
     { href: "/batches", icon: BookOpen, label: tr("ব্যাচ", "Batches") },

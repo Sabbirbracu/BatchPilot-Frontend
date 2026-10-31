@@ -26,7 +26,7 @@ export function StudentToolbar({
   const chip = "py-2 rounded-[12px]";
   return (
     <div className="mb-2 flex flex-wrap items-center gap-2">
-      <SearchField look="panel" value={q} onChange={onQ} placeholder={tr("নাম, রোল বা ফোন দিয়ে খুঁজুন", "Search by name, roll or phone")} className="min-w-[220px] flex-1" />
+      <SearchField look="panel" value={q} onChange={onQ} placeholder={tr("নাম, আইডি বা ফোন দিয়ে খুঁজুন", "Search by name, ID or phone")} className="min-w-[220px] flex-1" />
       <div className="-mx-3.5 flex gap-2 overflow-x-auto px-3.5 [scrollbar-width:none] max-md:w-[calc(100%+28px)] md:mx-0 md:px-0">
         <BatchSelect batches={batches} value={batchId} onChange={onBatch} />
         <FilterChip active={filter === "all"} onClick={() => onFilter("all")} className={chip}>

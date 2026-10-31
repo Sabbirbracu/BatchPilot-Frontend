@@ -45,3 +45,14 @@ export function useHydrated(): boolean {
     () => false,
   );
 }
+
+function subscribeHalfMinute(onChange: () => void) {
+  const id = setInterval(onChange, 30_000);
+  return () => clearInterval(id);
+}
+const nowHalfMinute = () => Math.floor(Date.now() / 30_000) * 30_000; // stable between ticks
+
+/** Epoch ms, refreshed every 30s; null during prerender. For "১০ মিনিট আগে" style labels. */
+export function useNow(): number | null {
+  return useSyncExternalStore(subscribeHalfMinute, nowHalfMinute, () => null);
+}

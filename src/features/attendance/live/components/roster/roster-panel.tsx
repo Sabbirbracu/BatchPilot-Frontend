@@ -15,7 +15,7 @@ export function RosterPanel({ detail, smsAt, notStarted }: { detail: BatchDetail
 
   const marks = useMemo(() => {
     const q = query.trim();
-    return detail.marks.filter((m) => (filter === "all" || m.status === filter) && (!q || m.name.includes(q) || m.roll.includes(q)));
+    return detail.marks.filter((m) => (filter === "all" || m.status === filter) && (!q || m.name.includes(q) || m.code.includes(q)));
   }, [detail.marks, filter, query]);
   const counts = { all: detail.total, present: detail.onTime, late: detail.late, absent: detail.absent };
 

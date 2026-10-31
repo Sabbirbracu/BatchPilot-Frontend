@@ -6,13 +6,13 @@ import type { StudentPage } from "@/lib/types";
  * (UTF-8 with BOM so Bangla shows correctly). Amounts are in taka.
  */
 export async function exportStudentsCsv(params: Record<string, unknown>) {
-  const rows: string[][] = [["Roll", "Name", "Guardian", "Guardian phone", "Phone", "Batches", "Due (৳)", "Due months", "Attendance this month (%)", "Joined", "Status"]];
+  const rows: string[][] = [["Student ID", "Name", "Guardian", "Guardian phone", "Phone", "Batches", "Due (৳)", "Due months", "Attendance this month (%)", "Joined", "Status"]];
   let cursor: string | undefined;
   do {
     const page = await api<StudentPage>("/students", { params: { ...params, cursor, limit: 200 } });
     for (const s of page.items) {
       rows.push([
-        s.roll_no,
+        s.student_code,
         s.name,
         s.guardian_name ?? "",
         s.guardian_phone ?? "",

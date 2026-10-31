@@ -19,6 +19,8 @@ const LOOKS: Record<string, KindLook> = {
   reminder_2: { bn: "বকেয়া", en: "Due", ...AMBER, Icon: BellIcon },
   reminder_3: { bn: "বকেয়া", en: "Due", ...AMBER, Icon: BellIcon },
   welcome: { bn: "স্বাগতম", en: "Welcome", ...GREEN, Icon: PeopleIcon },
+  admitted: { bn: "ভর্তি", en: "Admitted", ...GREEN, Icon: PeopleIcon },
+  admission_request: { bn: "ভর্তির আবেদন", en: "Admission request", ...AMBER, Icon: PeopleIcon },
   notice: { bn: "নোটিশ", en: "Notice", ...BLUE, Icon: MegaphoneIcon },
   summary: { bn: "সারাংশ", en: "Summary", ...GREY, Icon: DocIcon },
   result: { bn: "রেজাল্ট", en: "Result", ...BLUE, Icon: TrophyIcon },

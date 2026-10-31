@@ -39,11 +39,11 @@ export function StudentsHeader({
           {exporting ? tr("তৈরি হচ্ছে…", "Preparing…") : "Excel"}
         </HeaderButton>
         {canAdd && (
-          <PrimaryLink href={to("/students/new")} className="max-md:flex-1 max-md:justify-center">
+          <PrimaryLink href={to("/admissions/new")} className="max-md:flex-1 max-md:justify-center">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
               <path d="M12 5v14M5 12h14" />
             </svg>
-            {tr("নতুন স্টুডেন্ট", "New student")}
+            {tr("নতুন ভর্তি", "New admission")}
           </PrimaryLink>
         )}
       </div>

@@ -34,7 +34,7 @@ export function StudentFilters({
           {tr("কম উপস্থিতি", "Low attendance")} {num(low, lang)}
         </FilterChip>
       </div>
-      <SearchField look="compact" value={q} onChange={onQ} placeholder={tr("নাম, রোল বা ফোন", "Name, roll or phone")} className="w-full md:w-[200px]" />
+      <SearchField look="compact" value={q} onChange={onQ} placeholder={tr("নাম, আইডি বা ফোন", "Name, ID or phone")} className="w-full md:w-[200px]" />
     </div>
   );
 }

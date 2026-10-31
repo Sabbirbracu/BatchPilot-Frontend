@@ -14,7 +14,7 @@ export function StudentRow({ member: m, canCollect }: { member: BatchMember; can
   const { tr, lang } = useLang();
   return (
     <tr className="border-t border-[#F3F1FA]" style={owes(m) && m.month_paid === 0 ? { background: "#FFFAFA" } : undefined}>
-      <td className={`${td} num text-[13px] text-[#6B6880]`}>{digits(m.roll_no.padStart(2, "0"), lang)}</td>
+      <td className={`${td} num text-[13px] text-[#6B6880]`}>{digits(m.student_code, lang)}</td>
       <td className={td}>
         <div className="flex items-center gap-[9px]">
           <MemberAvatar member={m} />

@@ -9,7 +9,7 @@ import type { StudentPage } from "@/lib/types";
 import { VARS } from "./vars";
 
 /**
- * Real-looking values for message previews: the first student on the books (name, batch, roll),
+ * Real-looking values for message previews: the first student on the books (name, batch, ID),
  * today's date and the institution's name; the rest fall back to fixed samples.
  */
 export function useSample() {
@@ -23,7 +23,7 @@ export function useSample() {
   const values: Record<string, string> = {
     student: s?.name ?? VARS.student.sample,
     batch: s?.batch_names[0] ?? VARS.batch.sample,
-    roll: s?.roll_no ?? VARS.roll.sample,
+    student_id: s?.student_code ?? VARS.student_id.sample,
     date: today ? dateLabel(today, "bn") : VARS.date.sample,
     institution: me?.institution?.name ?? "",
     bkash: me?.institution?.settings.bkash_number ?? VARS.bkash.sample,

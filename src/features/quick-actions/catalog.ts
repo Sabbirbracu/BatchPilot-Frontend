@@ -37,7 +37,7 @@ export const ACTIONS: Record<ActionId, QuickAction> = {
     href: "/fees",
   },
   finger: { id: "finger", icon: FingerprintPattern, tone: "green", label: ["আঙুল নিবন্ধন", "Fingerprint"] },
-  student: { id: "student", icon: UserRoundPlus, tone: "purple", label: ["নতুন স্টুডেন্ট", "New student"], href: "/students/new" },
+  student: { id: "student", icon: UserRoundPlus, tone: "purple", label: ["নতুন ভর্তি", "New admission"], href: "/admissions/new" },
   diary: {
     id: "diary",
     icon: Camera,

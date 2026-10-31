@@ -7,7 +7,7 @@ export function RosterSearch({ value, onChange }: { value: string; onChange: (v:
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="নাম বা রোল খুঁজুন"
+        placeholder="নাম বা আইডি খুঁজুন"
         className="min-w-0 flex-1 bg-transparent text-[#17161F] outline-none placeholder:text-[#9E9BAD]"
       />
     </label>

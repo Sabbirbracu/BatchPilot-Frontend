@@ -8,7 +8,7 @@ import { FeePill } from "./fee-pill";
 import { MemberAvatar } from "./member-avatar";
 import { RowAction } from "./row-action";
 
-/** Phone row: avatar, name + roll, fee pill and attendance underneath, action on the right. */
+/** Phone row: avatar, name + ID, fee pill and attendance underneath, action on the right. */
 export function StudentListItem({ member: m, canCollect }: { member: BatchMember; canCollect: boolean }) {
   const { tr, lang } = useLang();
   const to = usePortalPath();
@@ -19,7 +19,7 @@ export function StudentListItem({ member: m, canCollect }: { member: BatchMember
         <Link href={to(`/students/${m.student_id}`)} className="block truncate text-[14.5px] font-semibold text-[#17161F]">
           {m.name}
           <span className="num ml-1.5 text-[12px] font-normal text-[#9E9BAD]">
-            {tr("রোল", "Roll")} {digits(m.roll_no, lang)}
+            {tr("আইডি", "ID")} {digits(m.student_code, lang)}
           </span>
         </Link>
         <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">

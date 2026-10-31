@@ -139,3 +139,90 @@ export function WhatsAppIcon({ size = 22, color = "#25D366" }: { size?: number; 
     </svg>
   );
 }
+
+// Icons for the admission, family-app, all-features and coming-soon sections.
+
+export const QrIcon = (p: IconProps) => (
+  <Line {...p}>
+    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+    <path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 17h4v4h-4" />
+  </Line>
+);
+
+export const PhoneIcon = (p: IconProps) => (
+  <Line {...p}>
+    <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+    <path d="M11 18h2" />
+  </Line>
+);
+
+export const UsersIcon = (p: IconProps) => (
+  <Line {...p}>
+    <circle cx="9" cy="8" r="3.5" />
+    <path d="M3 20a6 6 0 0 1 12 0" />
+    <circle cx="17" cy="9" r="2.5" />
+    <path d="M16 14a5 5 0 0 1 5 5" />
+  </Line>
+);
+
+export const BookIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z" />
+    <path d="M4 19V5M9 7h6M9 11h6" />
+  </Line>
+);
+
+export const OmrIcon = (p: IconProps) => (
+  <Line {...p}>
+    <rect x="4" y="3" width="16" height="18" rx="2.5" />
+    <circle cx="9" cy="8" r="1.5" />
+    <circle cx="15" cy="8" r="1.5" />
+    <circle cx="9" cy="13" r="1.5" />
+    <circle cx="15" cy="13" r="1.5" />
+    <path d="M8 18h8" />
+  </Line>
+);
+
+export const MegaphoneIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M4 10v4h3l6 4V6L7 10z" />
+    <path d="M17 9a4 4 0 0 1 0 6M19.5 7a7 7 0 0 1 0 10" />
+  </Line>
+);
+
+export const LayersIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M12 3 3 8l9 5 9-5z" />
+    <path d="m3 13 9 5 9-5" />
+  </Line>
+);
+
+export const ChartIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M4 20V4M4 20h16" />
+    <path d="M8 16v-4M12 16V8M16 16v-6" />
+  </Line>
+);
+
+export const ReceiptIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
+    <path d="M9 8h6M9 12h6" />
+  </Line>
+);
+
+export const ClockIcon = (p: IconProps) => (
+  <Line {...p}>
+    <circle cx="12" cy="13" r="8" />
+    <path d="M12 9v4l2.5 2M9 2h6" />
+  </Line>
+);
+
+export const PinIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z" />
+    <circle cx="12" cy="10" r="2.5" />
+  </Line>
+);

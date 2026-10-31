@@ -2,10 +2,10 @@
 
 import clsx from "clsx";
 import { useState } from "react";
-import { Button, ErrorBox, Field, Input } from "@/components/ui";
+import { Button, ErrorBox, Field, Input, Segmented, Switch } from "@/components/ui";
 import { WEEKDAYS, toPoisha } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
-import type { Batch } from "@/lib/types";
+import type { Batch, FeePlan } from "@/lib/types";
 
 export type BatchPayload = {
   name: string;
@@ -17,6 +17,11 @@ export type BatchPayload = {
   monthly_fee: number;
   admission_fee: number | null;
   capacity: number | null;
+  fee_plan: FeePlan;
+  course_fee: number | null;
+  installments: number;
+  location: string | null;
+  starts_on: string | null;
   version?: number;
 };
 
@@ -36,9 +41,15 @@ export function BatchForm({
   const [days, setDays] = useState<string[]>(initial?.days ?? []);
   const [start, setStart] = useState(initial?.start_time?.slice(0, 5) ?? "");
   const [end, setEnd] = useState(initial?.end_time?.slice(0, 5) ?? "");
-  const [fee, setFee] = useState(initial ? String(initial.monthly_fee / 100) : "");
+  const [plan, setPlan] = useState<FeePlan>(initial?.fee_plan ?? "monthly");
+  const [fee, setFee] = useState(initial?.monthly_fee ? String(initial.monthly_fee / 100) : "");
+  const [courseFee, setCourseFee] = useState(initial?.course_fee ? String(initial.course_fee / 100) : "");
+  const [installments, setInstallments] = useState(String(initial?.installments ?? 1));
+  const [takesAdmission, setTakesAdmission] = useState(Boolean(initial?.admission_fee));
   const [admission, setAdmission] = useState(initial?.admission_fee ? String(initial.admission_fee / 100) : "");
   const [capacity, setCapacity] = useState(initial?.capacity ? String(initial.capacity) : "");
+  const [location, setLocation] = useState(initial?.location ?? "");
+  const [startsOn, setStartsOn] = useState(initial?.starts_on ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<unknown>(null);
 
@@ -54,9 +65,14 @@ export function BatchForm({
         days,
         start_time: start || null,
         end_time: end || null,
-        monthly_fee: toPoisha(fee),
-        admission_fee: admission ? toPoisha(admission) : null,
+        fee_plan: plan,
+        monthly_fee: plan === "monthly" ? toPoisha(fee) : 0,
+        course_fee: plan === "course" ? toPoisha(courseFee) : null,
+        installments: plan === "course" ? Math.max(1, Number(installments) || 1) : 1,
+        admission_fee: takesAdmission && admission ? toPoisha(admission) : null,
         capacity: capacity ? Number(capacity) : null,
+        location: location.trim() || null,
+        starts_on: startsOn || null,
         ...(initial ? { version: initial.version } : {}),
       });
     } catch (err) {
@@ -107,17 +123,61 @@ export function BatchForm({
           <Input type="time" value={end} onChange={(e) => setEnd(e.target.value)} />
         </Field>
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <Field label={tr("ফি কীভাবে নেন?", "How do you charge?")}>
+        <Segmented<FeePlan>
+          value={plan}
+          onChange={setPlan}
+          options={[
+            { value: "monthly", label: tr("মাসিক ফি", "Monthly fee") },
+            { value: "course", label: tr("কোর্স ফি", "Course fee") },
+          ]}
+        />
+      </Field>
+      {plan === "monthly" ? (
         <Field label={tr("মাসিক ফি (৳)", "Monthly fee (৳)")}>
           <Input className="num" inputMode="numeric" value={fee} onChange={(e) => setFee(e.target.value)} placeholder="800" required />
         </Field>
-        <Field label={tr("ভর্তি ফি (৳)", "Admission (৳)")}>
-          <Input className="num" inputMode="numeric" value={admission} onChange={(e) => setAdmission(e.target.value)} />
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          <Field label={tr("পুরো কোর্সের ফি (৳)", "Whole course fee (৳)")}>
+            <Input className="num" inputMode="numeric" value={courseFee} onChange={(e) => setCourseFee(e.target.value)} placeholder="6000" required />
+          </Field>
+          <Field
+            label={tr("কয় কিস্তিতে?", "Instalments")}
+            hint={Number(installments) > 1 ? tr("প্রতি মাসে একটি কিস্তি", "One instalment a month") : tr("১ = একবারে পুরোটা", "1 = all at once")}
+          >
+            <Input className="num" inputMode="numeric" value={installments} onChange={(e) => setInstallments(e.target.value.replace(/\D/g, ""))} placeholder="1" />
+          </Field>
+        </div>
+      )}
+      <div className="rounded-xl border border-line p-3">
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-sm font-medium">{tr("ভর্তি ফি নেন?", "Charge an admission fee?")}</span>
+          <Switch checked={takesAdmission} onChange={setTakesAdmission} label={tr("ভর্তি ফি", "Admission fee")} />
+        </div>
+        {takesAdmission && (
+          <Input
+            className="num mt-3"
+            inputMode="numeric"
+            value={admission}
+            onChange={(e) => setAdmission(e.target.value)}
+            placeholder={tr("যেমন ১০০০", "e.g. 1000")}
+            aria-label={tr("ভর্তি ফি (৳)", "Admission fee (৳)")}
+            required
+          />
+        )}
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Field label={tr("সর্বোচ্চ সিট", "Seats")}>
+          <Input className="num" inputMode="numeric" value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="40" />
         </Field>
-        <Field label={tr("সর্বোচ্চ", "Capacity")}>
-          <Input className="num" inputMode="numeric" value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="90" />
+        <Field label={tr("ক্লাস শুরু", "Classes start")}>
+          <Input type="date" value={startsOn} onChange={(e) => setStartsOn(e.target.value)} />
         </Field>
       </div>
+      <Field label={tr("কোথায় (জায়গা/শাখা)", "Where (place/branch)")}>
+        <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder={tr("যেমন: স্টেশন রোড শাখা", "e.g. Station Road branch")} />
+      </Field>
       <ErrorBox error={error} />
       <Button type="submit" block size="lg" loading={busy}>
         {submitLabel}

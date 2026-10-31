@@ -15,7 +15,7 @@ export function RosterTableRow({ mark, smsAt }: { mark: StudentMark; smsAt: stri
   const absent = mark.status === "absent";
   return (
     <tr className={clsx("border-t border-[#F3F1FA]", absent && "bg-[#FFFAFA]")}>
-      <td className={clsx(cell, "num text-[#6B6880]")}>{mark.roll}</td>
+      <td className={clsx(cell, "num text-[#6B6880]")}>{mark.code}</td>
       <td className={cell}>
         <div className="flex items-center gap-[9px]">
           <StudentAvatar mark={mark} className="size-[30px] text-[13px]" />

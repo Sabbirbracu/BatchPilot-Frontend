@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 // Optimistic check only: no session cookie -> go to login. The API still verifies
 // every request (and each portal re-checks /auth/me), so this is just for speed.
 const PUBLIC_EXACT = ["/"]; // marketing landing page
-const PUBLIC_PREFIX = ["/login"];
+const PUBLIC_PREFIX = ["/login", "/join/", "/poster/"]; // admission QR pages are open to anyone
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

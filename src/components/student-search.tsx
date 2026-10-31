@@ -18,7 +18,7 @@ export function useDebounced<T>(value: T, ms = 250): T {
   return v;
 }
 
-/** Search by name, roll or phone. Tapping a result picks the student. */
+/** Search by name, ID or phone. Tapping a result picks the student. */
 export function StudentSearch({ onPick, autoFocus }: { onPick: (s: Student) => void; autoFocus?: boolean }) {
   const { tr, lang } = useLang();
   const [q, setQ] = useState("");
@@ -35,7 +35,7 @@ export function StudentSearch({ onPick, autoFocus }: { onPick: (s: Student) => v
         <Search className="pointer-events-none absolute top-1/2 left-3.5 size-5 -translate-y-1/2 text-muted" />
         <Input
           className="h-14 pl-11 text-lg"
-          placeholder={tr("নাম, রোল বা ফোন নম্বর", "Name, roll or phone")}
+          placeholder={tr("নাম, আইডি বা ফোন নম্বর", "Name, ID or phone")}
           value={q}
           onChange={(e) => setQ(e.target.value)}
           autoFocus={autoFocus}
@@ -51,7 +51,7 @@ export function StudentSearch({ onPick, autoFocus }: { onPick: (s: Student) => v
                 <span className="min-w-0">
                   <span className="block truncate font-semibold">{s.name}</span>
                   <span className="block truncate text-xs text-muted">
-                    {tr("রোল", "Roll")} {digits(s.roll_no, lang)} · {s.batch_names.join(", ")}
+                    {tr("আইডি", "ID")} {digits(s.student_code, lang)} · {s.batch_names.join(", ")}
                   </span>
                 </span>
                 {s.outstanding > 0 ? (

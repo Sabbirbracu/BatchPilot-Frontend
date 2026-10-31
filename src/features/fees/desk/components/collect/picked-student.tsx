@@ -5,7 +5,7 @@ import { digits, phoneLabel, taka } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
 import type { Student } from "@/lib/types";
 
-/** The chosen student: avatar, name with batches, roll and guardian number, total still owed. */
+/** The chosen student: avatar, name with batches, student ID and guardian number, total still owed. */
 export function PickedStudent({ student: s, outstanding, onClear }: { student: Student; outstanding: number; onClear: () => void }) {
   const { tr, lang } = useLang();
   return (
@@ -19,7 +19,7 @@ export function PickedStudent({ student: s, outstanding, onClear }: { student: S
           ))}
         </p>
         <p className="num m-0 truncate text-[12px]">
-          {tr("রোল", "Roll")} {digits(s.roll_no.padStart(2, "0"), lang)}
+          {tr("আইডি", "ID")} {digits(s.student_code, lang)}
           {s.guardian_phone && ` · ${tr("অভিভাবক", "Guardian")} ${phoneLabel(s.guardian_phone)}`}
           <button type="button" onClick={onClear} className="ml-2 font-semibold text-[#5B21B6]">
             {tr("বদলান", "Change")}

@@ -22,14 +22,14 @@ export function SiteHeader() {
           <BrandMark size={40} />
           <Wordmark className="text-[21px] tracking-[-0.6px] lg:text-[23px]" />
         </a>
-        <nav aria-label="পেজের অংশ" className="hidden flex-1 gap-[30px] text-[17px] font-medium lg:flex">
+        <nav aria-label="পেজের অংশ" className="hidden flex-1 gap-6 text-[16px] font-medium xl:flex">
           {NAV_LINKS.map((l) => (
             <a key={l.href} href={l.href} className="text-[#3B3850] hover:text-[#5B21B6]">
               {l.label}
             </a>
           ))}
         </nav>
-        <span className="flex-1 lg:hidden" />
+        <span className="flex-1 xl:hidden" />
         <a href={account.href} className="hidden text-[17px] font-semibold text-[#3B3850] hover:text-[#5B21B6] sm:inline">
           {account.label}
         </a>
@@ -43,14 +43,14 @@ export function SiteHeader() {
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-label={open ? "মেনু বন্ধ করুন" : "মেনু খুলুন"}
-          className="-mr-1 flex size-10 items-center justify-center rounded-xl text-[#17161F] hover:bg-[#F4EEFF] lg:hidden"
+          className="-mr-1 flex size-10 items-center justify-center rounded-xl text-[#17161F] hover:bg-[#F4EEFF] xl:hidden"
         >
           {open ? <CloseIcon size={22} /> : <MenuIcon size={22} />}
         </button>
       </Container>
 
       {open && (
-        <div className="animate-rise border-t border-[#F1EEF8] bg-white lg:hidden">
+        <div className="animate-rise border-t border-[#F1EEF8] bg-white xl:hidden">
           <Container className="flex flex-col py-3">
             {NAV_LINKS.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="rounded-xl px-2 py-3 text-[17px] font-medium text-[#3B3850]">

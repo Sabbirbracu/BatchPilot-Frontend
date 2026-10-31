@@ -9,7 +9,7 @@ import { digits, num, taka } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
 import type { Student, StudentPage } from "@/lib/types";
 
-/** The big ringed search box: type a name, roll or phone; results drop down; picking one fills the form. */
+/** The big ringed search box: type a name, ID or phone; results drop down; picking one fills the form. */
 export function StudentFinder({ onPick, initial, autoFocus }: { onPick: (s: Student) => void; initial?: string; autoFocus?: boolean }) {
   const { tr, lang } = useLang();
   const [q, setQ] = useState(initial ?? "");
@@ -37,7 +37,7 @@ export function StudentFinder({ onPick, initial, autoFocus }: { onPick: (s: Stud
             setOpen(true);
           }}
           onFocus={() => setOpen(true)}
-          placeholder={tr("নাম, রোল বা ফোন", "Name, roll or phone")}
+          placeholder={tr("নাম, আইডি বা ফোন", "Name, ID or phone")}
           aria-label={tr("স্টুডেন্ট খুঁজুন", "Find a student")}
           className="min-w-0 flex-1 bg-transparent text-[16px] font-semibold text-[#17161F] caret-[#5B21B6] outline-none placeholder:font-normal placeholder:text-[#9E9BAD]"
         />
@@ -65,7 +65,7 @@ export function StudentFinder({ onPick, initial, autoFocus }: { onPick: (s: Stud
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[14px] font-semibold">{s.name}</span>
                   <span className="num block truncate text-[11.5px] text-[#6B6880]">
-                    {tr("রোল", "Roll")} {digits(s.roll_no, lang)} · {s.batch_names.join(", ")}
+                    {tr("আইডি", "ID")} {digits(s.student_code, lang)} · {s.batch_names.join(", ")}
                   </span>
                 </span>
                 <span className="num text-[13px] font-bold" style={{ color: s.outstanding > 0 ? "#D92D20" : "#039855" }}>

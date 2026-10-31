@@ -1,8 +1,8 @@
 import { useLang } from "@/lib/i18n";
 import type { Message } from "@/lib/types";
 import { recipient, whenLabel } from "../../lib/message-meta";
-import { KindPill } from "./kind-pill";
-import { StatusPill } from "./status-pill";
+import { KindPill } from "@/features/shared/messages/kind-pill";
+import { SmsStatusPill } from "@/features/shared/messages/sms-status-pill";
 
 /** Table row: time, who, kind, the text (one line), status. */
 export function MessageRow({ message: m }: { message: Message }) {
@@ -24,7 +24,7 @@ export function MessageRow({ message: m }: { message: Message }) {
         </div>
       </td>
       <td className="p-2 text-right">
-        <StatusPill status={m.status} />
+        <SmsStatusPill status={m.status} />
       </td>
     </tr>
   );

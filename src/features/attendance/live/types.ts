@@ -18,7 +18,7 @@ export type BatchChipData = {
 
 export type StudentMark = {
   id: string;
-  roll: string;
+  code: string; // student ID
   name: string;
   status: MarkStatus;
   time: string | null; // "09:58"

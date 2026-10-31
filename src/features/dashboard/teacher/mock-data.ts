@@ -45,8 +45,8 @@ export const DEMO = {
     active_students: 286,
     batches: [],
     top_dues: [
-      { student_id: id(31), name: "আরিফ", roll_no: "22", outstanding: 240_000, months: 2 },
-      { student_id: id(32), name: "সুমাইয়া", roll_no: "09", outstanding: 240_000, months: 2 },
+      { student_id: id(31), name: "আরিফ", student_code: "22", outstanding: 240_000, months: 2 },
+      { student_id: id(32), name: "সুমাইয়া", student_code: "09", outstanding: 240_000, months: 2 },
     ],
     collectors_today: [],
     attendance_rate_today: 89,
@@ -58,8 +58,8 @@ export const DEMO = {
       { batch_id: id(4), name: "Class ৯", subject: "গণিত", room: "রুম ৬", start_time: "15:00", end_time: "16:30", scheduled_today: true, student_count: 35, taken: false, present: 0, absent: 0, absent_names: [] },
     ],
     live_marks: [
-      { student_id: id(11), name: "তানিয়া আক্তার", roll_no: "14", batch_name: "HSC ২৭", status: "present", at: at("10:04"), sms_sent: true },
-      { student_id: id(12), name: "সাকিব হোসেন", roll_no: "27", batch_name: "HSC ২৭", status: "late", at: at("10:14"), late_minutes: 14 },
+      { student_id: id(11), name: "তানিয়া আক্তার", student_code: "14", batch_name: "HSC ২৭", status: "present", at: at("10:04"), sms_sent: true },
+      { student_id: id(12), name: "সাকিব হোসেন", student_code: "27", batch_name: "HSC ২৭", status: "late", at: at("10:14"), late_minutes: 14 },
     ],
     absent_streaks: [{ student_id: id(21), name: "তানভীর", days: 3 }],
   } satisfies TeacherDashboardData,

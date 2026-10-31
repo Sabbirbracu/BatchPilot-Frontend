@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { monthLabel, taka } from "@/lib/format";
+import { duesLabel, monthLabel, taka } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
 import type { MonthTile } from "../../lib/month-tiles";
 
@@ -23,7 +23,7 @@ export function MonthTiles({
       <p className="m-0 mb-2 text-[13px] font-bold">{tr("কোন মাসের ফি নিচ্ছেন?", "Which months is this for?")}</p>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {tiles.map((t, i) => {
-          const name = monthLabel(t.month, lang);
+          const name = t.kind === "open" ? duesLabel(t.dues, lang) : monthLabel(t.month, lang);
           if (t.kind === "paid") {
             return (
               <div key={t.month} className="rounded-[14px] bg-[#ECFDF3] px-[11px] py-[9px] text-[#039855]">

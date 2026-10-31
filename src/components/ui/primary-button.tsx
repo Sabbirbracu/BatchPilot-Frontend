@@ -12,6 +12,7 @@ export function PrimaryButton({
   children,
   onClick,
   type = "button",
+  form,
   disabled,
   loading,
   size = "md",
@@ -20,6 +21,7 @@ export function PrimaryButton({
   children: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
+  form?: string; // submit a form elsewhere on the page (header buttons)
   disabled?: boolean;
   loading?: boolean;
   size?: keyof typeof SIZE;
@@ -28,6 +30,7 @@ export function PrimaryButton({
   return (
     <button
       type={type}
+      form={form}
       onClick={onClick}
       disabled={disabled || loading}
       className={clsx(

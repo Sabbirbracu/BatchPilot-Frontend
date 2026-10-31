@@ -74,6 +74,26 @@ export function monthLabel(isoDate: string, lang: Lang, withYear = false): strin
   return withYear ? `${name} ${digits(y, lang)}` : name;
 }
 
+type DueLike = { month: string; kind?: string; label?: string | null };
+
+/** A due's name: the month for monthly fees, else its label ("ভর্তি ফি", "কিস্তি ১/৩"). */
+export function dueLabel(d: DueLike, lang: Lang, withYear = false): string {
+  if (!d.kind || d.kind === "monthly") return monthLabel(d.month, lang, withYear);
+  if (lang === "bn") return d.label ?? d.kind;
+  const latin = (d.label ?? "").replace(/[০-৯]/g, (c) => String(BN_DIGITS.indexOf(c)));
+  if (d.kind === "admission") return "Admission fee";
+  if (d.kind === "course") return "Course fee";
+  return `Instalment ${latin.replace(/[^0-9/]/g, "")}`;
+}
+
+/** Several dues in one line: months first, then one-time fees ("নভেম্বর + ভর্তি ফি"). */
+export function duesLabel(dues: DueLike[], lang: Lang): string {
+  const months = [...new Set(dues.filter((d) => !d.kind || d.kind === "monthly").map((d) => d.month))].sort();
+  const parts = months.map((m) => monthLabel(m, lang));
+  for (const d of dues) if (d.kind && d.kind !== "monthly") parts.push(dueLabel(d, lang));
+  return [...new Set(parts)].join(" + ");
+}
+
 const BN_MONTHS_SHORT = ["জানু", "ফেব্রু", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টে", "অক্টো", "নভে", "ডিসে"];
 
 /** "২ অক্টো" / "2 Oct" — for tight rows. */
@@ -142,4 +162,22 @@ export function monthCase(name: string, kind: "in" | "of"): string {
   if (name.endsWith("ি")) return name + (kind === "in" ? "তে" : "র");
   if (name.endsWith("ই")) return name + (kind === "in" ? "য়ে" : "য়ের");
   return name + (kind === "in" ? "ে" : "ের");
+}
+
+/** "এইমাত্র" / "১০ মিনিট আগে" / "২ ঘণ্টা আগে" / "গতকাল" / "৩ দিন আগে". `now` comes from useNow(). */
+export function agoLabel(iso: string, now: number, lang: Lang): string {
+  const min = Math.max(0, Math.floor((now - new Date(iso).getTime()) / 60_000));
+  const bn = lang === "bn";
+  if (min < 1) return bn ? "এইমাত্র" : "just now";
+  if (min < 60) return bn ? `${digits(min, lang)} মিনিট আগে` : `${min} min ago`;
+  const h = Math.floor(min / 60);
+  if (h < 24) return bn ? `${digits(h, lang)} ঘণ্টা আগে` : `${h} h ago`;
+  const d = Math.floor(h / 24);
+  if (d === 1) return bn ? "গতকাল" : "yesterday";
+  return bn ? `${digits(d, lang)} দিন আগে` : `${d} days ago`;
+}
+
+/** What was typed, as plain 0-9 digits: Bangla digits become Latin, everything else is dropped. */
+export function latinDigits(typed: string): string {
+  return typed.replace(/[০-৯]/g, (c) => String(BN_DIGITS.indexOf(c))).replace(/[^0-9]/g, "");
 }

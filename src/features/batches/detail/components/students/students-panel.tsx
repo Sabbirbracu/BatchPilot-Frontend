@@ -37,7 +37,7 @@ export function StudentsPanel({
     (m) =>
       !term ||
       m.name.toLowerCase().includes(term) ||
-      m.roll_no === term ||
+      m.student_code === term ||
       (digitsOnly.length >= 3 && (m.guardian_phone ?? "").includes(digitsOnly)),
   );
 

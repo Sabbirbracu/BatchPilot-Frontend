@@ -1,1 +1,1 @@
-export { default } from "@/features/dashboard/family";
+export { default } from "@/features/family";

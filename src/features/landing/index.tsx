@@ -3,7 +3,12 @@
 // Text uses the font's natural line height like the design (no Tailwind leading), so
 // font sizes here are px values rather than text-sm/text-lg, which carry their own leading.
 
+import { AdmissionSection } from "./sections/admission/admission-section";
+import { AllFeaturesSection } from "./sections/all-features/all-features-section";
 import { BeforeAfterSection } from "./sections/before-after/before-after-section";
+import { ComingSoonSection } from "./sections/coming-soon/coming-soon-section";
+import { FamilySection } from "./sections/family/family-section";
+import { FeePlansSection } from "./sections/fee-plans/fee-plans-section";
 import { FaqSection } from "./sections/faq/faq-section";
 import { FeaturesSection } from "./sections/features/features-section";
 import { FinalCtaSection } from "./sections/final-cta/final-cta-section";
@@ -23,7 +28,12 @@ export default function Landing() {
         <HeroSection />
         <PainSection />
         <FeaturesSection />
+        <AdmissionSection />
+        <FeePlansSection />
+        <FamilySection />
+        <AllFeaturesSection />
         <BeforeAfterSection />
+        <ComingSoonSection />
         <HowSection />
         <PricingSection />
         <FaqSection />
