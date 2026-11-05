@@ -1,6 +1,6 @@
 /** The teacher hesitating to ask for fees ("উম্‌…"), a calendar showing 3 months due. */
 export function ShyAsk() {
-  const font = { fontFamily: "var(--font-hind), sans-serif", fontWeight: 700 };
+  const font = { fontFamily: "var(--font-bangla), sans-serif", fontWeight: 700 };
   return (
     <svg viewBox="0 0 260 150" width="100%" className="block" role="img" aria-label="স্যার বকেয়া চাইতে ইতস্তত করছেন, পাশে ক্যালেন্ডারে তিন মাস বকেয়া">
       <defs>

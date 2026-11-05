@@ -26,15 +26,15 @@ export function RosterPanel({ detail, smsAt, notStarted }: { detail: BatchDetail
   );
 
   return (
-    <section aria-label="স্টুডেন্টদের হাজিরা" className="space-y-3 lg:space-y-0 lg:rounded-[24px] lg:bg-white lg:px-4 lg:pt-3.5 lg:pb-1">
-      <div className="flex items-center gap-2.5 rounded-[22px] bg-white p-1.5 md:rounded-[20px] md:p-3 lg:mb-2 lg:rounded-none lg:p-0">
+    <section aria-label="স্টুডেন্টদের হাজিরা" className="space-y-3 lg:space-y-0 lg:rounded-[24px] lg:bg-white lg:px-5 lg:pt-5 lg:pb-2">
+      <div className="flex items-center gap-2.5 rounded-[22px] bg-white p-1.5 md:rounded-[20px] md:p-3 lg:mb-3 lg:rounded-none lg:p-0">
         <StatusTabs value={filter} onChange={setFilter} counts={counts} />
         <span className="hidden flex-1 md:block" />
         <span className="hidden md:flex">
           <RosterSearch value={query} onChange={setQuery} />
         </span>
       </div>
-      <div className="rounded-[24px] bg-white px-4 py-1 lg:hidden">{marks.length ? <ul>{[...marks].sort(byPriority).map((m) => <RosterListItem key={m.id} mark={m} />)}</ul> : empty}</div>
+      <div className="rounded-[24px] bg-white px-4 py-1 lg:hidden">{marks.length ? <ul>{[...marks].sort(byPriority).map((m) => <RosterListItem key={m.id} mark={m} smsAt={smsAt} />)}</ul> : empty}</div>
       <div className="hidden lg:block">{marks.length ? <RosterTable marks={marks} smsAt={smsAt} /> : empty}</div>
     </section>
   );

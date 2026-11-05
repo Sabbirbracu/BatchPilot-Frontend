@@ -9,8 +9,7 @@ import { num } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
 import { BatchCard } from "./components/card/batch-card";
 import { NewBatchCard } from "./components/card/new-batch-card";
-import { FilterBar } from "./components/filters/filter-bar";
-import { MonthTotals } from "./components/filters/month-totals";
+import { BatchFilter, type BatchFilterValue } from "./components/filters/batch-filter";
 import { BatchesHeader } from "./components/header/batches-header";
 import type { ListView } from "./components/header/view-toggle";
 import { WeekRoutine } from "./components/routine/week-routine";
@@ -27,8 +26,9 @@ export default function BatchesPage() {
   const today = useTodayISO();
   const now = useDhakaMinutes();
   const [view, setView] = useState<ListView>("cards");
-  const [archived, setArchived] = useState(false);
-  const [group, setGroup] = useState<string | null>(null);
+  const [filter, setFilter] = useState<BatchFilterValue>("open");
+  const archived = filter === "closed";
+  const group = filter.startsWith("g:") ? filter.slice(2) : null;
   const [q, setQ] = useState("");
   const list = useBatchList({ archived, group, q });
   const archive = useArchiveBatch();
@@ -56,22 +56,16 @@ export default function BatchesPage() {
   }
 
   return (
-    <div className="space-y-3 text-[#17161F] [line-height:normal]">
-      <BatchesHeader subtitle={subtitle} q={q} onQ={setQ} view={view} onView={setView} canCreate={canManage} />
-      <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center">
-        <FilterBar
-          archived={archived}
-          onArchived={(v) => {
-            setArchived(v);
-            setGroup(null);
-          }}
-          counts={list.counts}
-          groups={list.groups}
-          group={group}
-          onGroup={setGroup}
-        />
-        {!archived && <MonthTotals {...list.totals} className="lg:ml-auto lg:flex-none" />}
-      </div>
+    <div className="space-y-5 text-[#17161F] [line-height:normal] md:space-y-6">
+      <BatchesHeader
+        subtitle={subtitle}
+        q={q}
+        onQ={setQ}
+        view={view}
+        onView={setView}
+        canCreate={canManage}
+        filter={<BatchFilter value={filter} onChange={setFilter} counts={list.counts} groups={list.groups} />}
+      />
 
       {list.isLoading ? (
         <PageLoader />
@@ -82,7 +76,7 @@ export default function BatchesPage() {
       ) : list.batches.length === 0 && (archived || !canManage || q || group) ? (
         <Empty title={q || group ? tr("এমন কোনো ব্যাচ নেই", "No matching batches") : tr("কোনো ব্যাচ নেই", "No batches")} />
       ) : (
-        <section aria-label={tr("ব্যাচের তালিকা", "Batch list")} className="grid gap-3.5 md:auto-rows-fr md:grid-cols-2 xl:grid-cols-3">
+        <section aria-label={tr("ব্যাচের তালিকা", "Batch list")} className="grid gap-4 md:auto-rows-fr md:grid-cols-2 md:gap-5 xl:grid-cols-3 xl:gap-6">
           {list.batches.map((b) => (
             <BatchCard
               key={b.id}

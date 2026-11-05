@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Hind_Siliguri, Sora } from "next/font/google";
+import { Noto_Sans_Bengali, Sora } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
 const sora = Sora({ variable: "--font-sora", subsets: ["latin"], weight: ["500", "600", "700", "800"] });
-const hind = Hind_Siliguri({ variable: "--font-hind", subsets: ["bengali", "latin"], weight: ["400", "500", "600", "700"] });
+const bangla = Noto_Sans_Bengali({ variable: "--font-bangla", subsets: ["bengali", "latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "BatchPilot", template: "%s · BatchPilot" },
@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="bn" className={`${sora.variable} ${hind.variable} h-full antialiased`}>
+    <html lang="bn" className={`${sora.variable} ${bangla.variable} h-full antialiased`}>
       <body className="min-h-full">
         <Providers>{children}</Providers>
       </body>

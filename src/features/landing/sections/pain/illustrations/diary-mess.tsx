@@ -1,6 +1,6 @@
 /** Open diary full of crossed-out sums, coins and a question mark. */
 export function DiaryMess() {
-  const font = { fontFamily: "var(--font-hind), sans-serif", fontWeight: 700 };
+  const font = { fontFamily: "var(--font-bangla), sans-serif", fontWeight: 700 };
   return (
     <svg viewBox="0 0 260 150" width="100%" className="block" role="img" aria-label="খোলা ডায়েরিতে কাটাকুটি হিসাব, পাশে কয়েন আর প্রশ্নবোধক চিহ্ন">
       <defs>

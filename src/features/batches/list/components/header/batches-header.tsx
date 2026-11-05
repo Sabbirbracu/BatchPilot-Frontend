@@ -3,7 +3,7 @@ import { usePortalPath } from "@/lib/portal";
 import { PrimaryLink, SearchField } from "@/components/ui";
 import { type ListView, ViewToggle } from "./view-toggle";
 
-/** Title + summary line, search, view switch and "নতুন ব্যাচ". Wraps into two rows on phones. */
+/** Title + summary line, then search · filter · view switch and "নতুন ব্যাচ". Phones: search on its own row, filter + view below. */
 export function BatchesHeader({
   subtitle,
   q,
@@ -11,6 +11,7 @@ export function BatchesHeader({
   view,
   onView,
   canCreate,
+  filter,
 }: {
   subtitle: string;
   q: string;
@@ -18,12 +19,13 @@ export function BatchesHeader({
   view: ListView;
   onView: (v: ListView) => void;
   canCreate: boolean;
+  filter: React.ReactNode;
 }) {
   const { tr } = useLang();
   const to = usePortalPath();
   return (
     <header className="flex flex-wrap items-center gap-3">
-      <div className="min-w-0 flex-1">
+      <div className="min-w-[180px] flex-1">
         <h1 className="m-0 text-[25px] font-bold">{tr("ব্যাচ", "Batches")}</h1>
         <p className="m-0 text-[14px] text-[#6B6880]">{subtitle}</p>
       </div>
@@ -35,8 +37,14 @@ export function BatchesHeader({
           {tr("নতুন ব্যাচ", "New batch")}
         </PrimaryLink>
       )}
-      <div className="flex w-full items-center gap-3 lg:w-auto">
-        <SearchField value={q} onChange={onQ} placeholder={tr("ব্যাচ খুঁজুন", "Search batches")} className="min-w-0 flex-1 lg:w-[220px] lg:flex-none" />
+      <div className="flex w-full flex-wrap items-center gap-3 md:flex-nowrap lg:w-auto">
+        <SearchField
+          value={q}
+          onChange={onQ}
+          placeholder={tr("ব্যাচ খুঁজুন", "Search batches")}
+          className="min-w-0 basis-full md:flex-1 md:basis-auto lg:w-[220px] lg:flex-none"
+        />
+        <div className="min-w-0 flex-1 md:w-[210px] md:flex-none">{filter}</div>
         <ViewToggle value={view} onChange={onView} />
       </div>
     </header>

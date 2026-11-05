@@ -9,9 +9,9 @@ export function NewBatchCard() {
   return (
     <Link
       href={to("/batches/new")}
-      className="flex min-h-[240px] flex-col items-center justify-center gap-2.5 rounded-[22px] border-2 border-dashed border-[#D9CCF7] bg-[rgba(244,238,255,.4)] p-6 text-[#5B21B6] hover:bg-[rgba(244,238,255,.8)]"
+      className="group flex min-h-[260px] flex-col items-center justify-center gap-3 rounded-[24px] border-2 border-dashed border-[#DCD0F7] bg-white/50 p-6 text-[#5B21B6] transition-colors hover:border-[#C9B3FF] hover:bg-[rgba(244,238,255,.6)]"
     >
-      <span className="flex size-[54px] items-center justify-center rounded-[18px] bg-[linear-gradient(135deg,#7C3AED,#5B21B6)] text-white shadow-[0_10px_20px_-8px_rgba(91,33,182,.6)]">
+      <span className="flex size-[52px] items-center justify-center rounded-[18px] bg-[linear-gradient(135deg,#7C3AED,#5B21B6)] text-white shadow-[0_10px_20px_-8px_rgba(91,33,182,.6)] transition-transform group-hover:scale-105">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
           <path d="M12 5v14M5 12h14" />
         </svg>

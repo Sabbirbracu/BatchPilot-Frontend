@@ -2,6 +2,8 @@
 export { AvatarStack } from "./avatar-stack";
 export { Button, ButtonLink } from "./button";
 export { Card } from "./card";
+export { BottomSheet } from "./bottom-sheet";
+export { type SelectOption, SelectMenu, SelectTile } from "./select-menu";
 export { Dialog } from "./dialog";
 export { Empty } from "./empty";
 export { ErrorBox, errorText } from "./error-box";

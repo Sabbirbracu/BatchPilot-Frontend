@@ -1,6 +1,6 @@
 /** A guardian calling late at night (10:45 pm). */
 export function NightCall() {
-  const family = "var(--font-hind), sans-serif";
+  const family = "var(--font-bangla), sans-serif";
   return (
     <svg viewBox="0 0 260 150" width="100%" className="block" role="img" aria-label="রাতে অভিভাবকের ফোন বাজছে">
       <defs>

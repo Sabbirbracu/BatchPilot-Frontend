@@ -3,7 +3,7 @@ import { RosterTableRow } from "./roster-table-row";
 
 /** Laptop/desktop roster, in student ID order. */
 export function RosterTable({ marks, smsAt }: { marks: StudentMark[]; smsAt: string | null }) {
-  const th = "px-2 py-1.5 font-medium";
+  const th = "px-3 py-2 font-medium";
   return (
     <table className="w-full border-collapse text-[14px]">
       <thead>
@@ -14,7 +14,6 @@ export function RosterTable({ marks, smsAt }: { marks: StudentMark[]; smsAt: str
           <th className={th}>অবস্থা</th>
           <th className={th}>অভিভাবক</th>
           <th className={`${th} hidden xl:table-cell`}>এ মাসে</th>
-          <th />
         </tr>
       </thead>
       <tbody>

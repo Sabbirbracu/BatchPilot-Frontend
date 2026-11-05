@@ -4,7 +4,7 @@ import { usePortalPath } from "@/lib/portal";
 import type { Batch } from "@/lib/types";
 import { type MenuItem, MoreMenu } from "@/components/ui";
 
-const btn = "flex-1 rounded-[11px] py-[7px] text-center text-[13px] font-bold";
+const btn = "flex-1 rounded-[12px] py-2.5 text-center text-[13.5px] font-bold transition-colors";
 
 /** Card footer: হাজিরা · স্টুডেন্ট · ফি · ⋯ */
 export function CardActions({ batch: b, canManage, onArchive }: { batch: Batch; canManage: boolean; onArchive: () => void }) {
@@ -20,7 +20,7 @@ export function CardActions({ batch: b, canManage, onArchive }: { batch: Batch; 
     );
   }
   return (
-    <div className="mt-auto flex gap-2 border-t border-[#F3F1FA] pt-2.5">
+    <div className="mt-auto flex gap-2 border-t border-[#F3F1FA] pt-4">
       <Link href={to(`/attendance/${b.id}`)} className={`${btn} bg-[#F4EEFF] text-[#5B21B6] hover:bg-[#EBE1FF]`}>
         {tr("হাজিরা", "Attendance")}
       </Link>
@@ -33,7 +33,7 @@ export function CardActions({ batch: b, canManage, onArchive }: { batch: Batch; 
       <MoreMenu
         items={items}
         label={tr("আরো অপশন", "More options")}
-        className="w-9 rounded-[11px] bg-[#F7F5FC] py-1.5 text-center text-[15px] font-bold text-[#6B6880] hover:bg-[#EFEBF8]"
+        className="h-full w-11 rounded-[12px] bg-[#F7F5FC] text-center text-[15px] font-bold text-[#6B6880] hover:bg-[#EFEBF8]"
       />
     </div>
   );

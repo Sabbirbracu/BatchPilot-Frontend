@@ -1,11 +1,12 @@
 import { useLang } from "@/lib/i18n";
 import type { BatchDraft } from "../../lib/draft";
 import { DayPicker } from "../fields/day-picker";
+import { ModeToggle } from "../fields/mode-toggle";
 import { TextField } from "../fields/text-field";
 import { TimeField } from "../fields/time-field";
 import { StepCard } from "./step-card";
 
-/** ধাপ ১ · ব্যাচ ও সময় — name, subject, class, days, start/end time and room. */
+/** ধাপ ১ · ব্যাচ ও সময় — name, subject, class, days, start/end time, room and offline/online. */
 export function BatchTimeStep({
   draft: d,
   set,
@@ -16,6 +17,7 @@ export function BatchTimeStep({
   suggestions: { subjects: string[]; classes: string[] };
 }) {
   const { tr } = useLang();
+  const online = d.mode === "online";
   return (
     <StepCard
       step={tr("ধাপ ১", "Step 1")}
@@ -39,20 +41,19 @@ export function BatchTimeStep({
       <div className="mt-3">
         <DayPicker value={d.days} onChange={(days) => set({ days })} />
       </div>
-      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <TimeField label={tr("শুরু", "Starts")} value={d.start_time} onChange={(start_time) => set({ start_time })} />
         <TimeField label={tr("শেষ", "Ends")} value={d.end_time} onChange={(end_time) => set({ end_time })} align="right" />
-        <div className="col-span-2 sm:col-span-1">
-          <TextField
-            id="nb-room"
-            label={tr("রুম", "Room")}
-            optional={tr("(ঐচ্ছিক)", "(optional)")}
-            value={d.location}
-            onChange={(location) => set({ location })}
-            placeholder={tr("যেমন: রুম ১", "e.g. Room 1")}
-            look="soft"
-          />
-        </div>
+        <TextField
+          id="nb-room"
+          label={online ? tr("প্ল্যাটফর্ম", "Platform") : tr("রুম", "Room")}
+          optional={tr("(ঐচ্ছিক)", "(optional)")}
+          value={d.location}
+          onChange={(location) => set({ location })}
+          placeholder={online ? tr("যেমন: Zoom, Meet", "e.g. Zoom, Meet") : tr("যেমন: রুম ১", "e.g. Room 1")}
+          look="soft"
+        />
+        <ModeToggle value={d.mode} onChange={(mode) => set({ mode })} />
       </div>
     </StepCard>
   );

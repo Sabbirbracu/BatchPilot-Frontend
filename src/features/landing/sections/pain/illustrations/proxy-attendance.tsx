@@ -1,6 +1,6 @@
 /** A student answering "present" for an empty seat. */
 export function ProxyAttendance() {
-  const family = "var(--font-hind), sans-serif";
+  const family = "var(--font-bangla), sans-serif";
   return (
     <svg viewBox="0 0 260 150" width="100%" className="block" role="img" aria-label="একজন স্টুডেন্ট খালি সিটের বন্ধুর হয়ে উপস্থিত বলছে">
       <defs>

@@ -7,7 +7,7 @@ import { digits } from "@/lib/format";
 const DAYS = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"];
 const MONTHS = ["জানু", "ফেব্রু", "মার্চ", "এপ্রি", "মে", "জুন", "জুলা", "আগ", "সেপ্টে", "অক্টো", "নভে", "ডিসে"];
 
-/** "আজ ▾" on phones, "আজ, শুক্র ২৩ অক্টো ▾" on wider screens. Other days come later. */
+/** "আজ ▾" on phones and tablets, "আজ, শুক্র ২৩ অক্টো ▾" from laptops up. Other days come later. */
 export function DatePill({ date }: { date: string }) {
   const toast = useToast();
   const d = new Date(date + "T00:00:00");
@@ -19,7 +19,7 @@ export function DatePill({ date }: { date: string }) {
     >
       <CalendarDays className="size-5 text-[#5B21B6] md:size-[18px]" />
       <span>
-        আজ<span className="hidden md:inline">, {DAYS[d.getDay()]} {digits(d.getDate(), "bn")} {MONTHS[d.getMonth()]}</span>
+        আজ<span className="hidden lg:inline">, {DAYS[d.getDay()]} {digits(d.getDate(), "bn")} {MONTHS[d.getMonth()]}</span>
       </span>
       <span className="text-[#17161F] md:text-[#9E9BAD]">▾</span>
     </button>

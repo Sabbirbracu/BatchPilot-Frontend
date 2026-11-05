@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import { WEEKDAYS } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
+import { dayColor } from "../../../shared/day-colors";
 import { Labeled } from "./labeled";
 
-/** "কোন কোন দিন" — seven day buttons, class days filled purple. */
+/** "কোন কোন দিন" — seven day buttons; picked days are filled purple or gold by rotation (see day-colors). */
 export function DayPicker({ value, onChange }: { value: string[]; onChange: (days: string[]) => void }) {
   const { tr, lang } = useLang();
   const toggle = (code: string) => onChange(value.includes(code) ? value.filter((d) => d !== code) : WEEKDAYS.map((d) => d.code).filter((c) => c === code || value.includes(c)));
@@ -20,8 +21,9 @@ export function DayPicker({ value, onChange }: { value: string[]; onChange: (day
               onClick={() => toggle(d.code)}
               className={clsx(
                 "flex-1 rounded-[11px] py-2 text-[13px] transition-colors",
-                on ? "bg-[#5B21B6] font-bold text-white" : "bg-[#F7F5FC] font-medium text-[#6B6880] hover:bg-[#EFEBF8]",
+                on ? "font-bold" : "bg-[#F7F5FC] font-medium text-[#6B6880] hover:bg-[#EFEBF8]",
               )}
+              style={on ? { background: dayColor(d.code).bg, color: dayColor(d.code).fg } : undefined}
             >
               {lang === "bn" ? d.bn : d.en}
             </button>

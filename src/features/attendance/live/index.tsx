@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ErrorBox, PageLoader } from "@/components/ui";
 import { AutoSmsCard } from "./components/auto-sms/auto-sms-card";
-import { BatchChips } from "./components/batch-chips/batch-chips";
+import { BatchSheetPicker } from "./components/batch-picker/batch-sheet-picker";
 import { AttendanceHeader } from "./components/header/attendance-header";
 import { LiveFeed } from "./components/live/live-feed";
 import { RosterPanel } from "./components/roster/roster-panel";
@@ -28,17 +28,17 @@ export default function AttendancePage() {
   const smsAt = view.autoSms?.at ?? null;
 
   return (
-    <div className="space-y-3 text-[#17161F] [line-height:normal]">
-      <AttendanceHeader date={view.date} device={view.device} batchId={selectedId} demo={view.demo} />
+    <div className="space-y-5 text-[#17161F] [line-height:normal] md:space-y-6">
+      <AttendanceHeader date={view.date} batchId={selectedId} demo={view.demo} batches={view.batches} onSelectBatch={setPicked} />
       {view.batches.length > 0 ? (
-        <BatchChips batches={view.batches} selectedId={selectedId} onSelect={setPicked} />
+        <BatchSheetPicker batches={view.batches} selectedId={selectedId} onSelect={setPicked} className="md:hidden" />
       ) : (
         <p className="rounded-[24px] bg-white py-10 text-center text-[15px] text-[#6B6880]">আজ কোনো ব্যাচ নেই।</p>
       )}
 
       {batch && (
-        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-3.5">
-          <div className="min-w-0 space-y-3">
+        <div className="grid gap-5 md:gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="min-w-0 space-y-5 md:space-y-6">
             {detail ? (
               <>
                 <BatchHero batch={batch} detail={detail} className="md:hidden" />
@@ -50,7 +50,7 @@ export default function AttendancePage() {
               <PageLoader />
             )}
           </div>
-          <aside className="grid content-start gap-3 md:grid-cols-2 lg:grid-cols-1">
+          <aside className="grid content-start gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-1">
             <LiveFeed events={view.live} />
             {smsAt && detail && detail.absent > 0 && <AutoSmsCard at={smsAt} absent={detail.absent} variant="panel" className="hidden lg:block" />}
             {view.week && <WeekChart days={view.week} />}

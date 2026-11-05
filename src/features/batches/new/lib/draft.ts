@@ -1,4 +1,4 @@
-import type { Batch, FeePlan } from "@/lib/types";
+import type { Batch, BatchMode, FeePlan } from "@/lib/types";
 
 export type BatchDraft = {
   name: string;
@@ -8,6 +8,7 @@ export type BatchDraft = {
   start_time: string | null; // "18:00"
   end_time: string | null;
   location: string;
+  mode: BatchMode;
   fee_plan: FeePlan;
   monthly_fee: string; // taka, as typed
   course_fee: string;
@@ -26,6 +27,7 @@ export const EMPTY_DRAFT: BatchDraft = {
   start_time: null,
   end_time: null,
   location: "",
+  mode: "offline",
   fee_plan: "monthly",
   monthly_fee: "",
   course_fee: "",
@@ -49,6 +51,7 @@ export function toPayload(d: BatchDraft) {
     start_time: d.start_time,
     end_time: d.end_time,
     location: d.location.trim() || null,
+    mode: d.mode,
     fee_plan: d.fee_plan,
     monthly_fee: course ? 0 : poisha(d.monthly_fee),
     course_fee: course ? poisha(d.course_fee) : null,

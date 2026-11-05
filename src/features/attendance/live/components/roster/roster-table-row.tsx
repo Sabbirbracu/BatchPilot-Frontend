@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { clockShort } from "@/lib/format";
 import type { StudentMark } from "../../types";
-import { CallGuardian } from "./call-guardian";
 import { GuardianNote } from "./guardian-note";
 import { ManualBadge } from "./manual-badge";
 import { MonthBar } from "./month-bar";
@@ -9,7 +8,7 @@ import { StatusPill } from "./status-pill";
 import { StreakBadge } from "./streak-badge";
 import { StudentAvatar } from "./student-avatar";
 
-const cell = "px-2 py-[7px]";
+const cell = "px-3 py-2.5";
 
 export function RosterTableRow({ mark, smsAt }: { mark: StudentMark; smsAt: string | null }) {
   const absent = mark.status === "absent";
@@ -34,7 +33,6 @@ export function RosterTableRow({ mark, smsAt }: { mark: StudentMark; smsAt: stri
       <td className={clsx(cell, "hidden xl:table-cell")}>
         <MonthBar rate={mark.monthRate} />
       </td>
-      <td className={clsx(cell, "text-right")}>{absent && <CallGuardian mark={mark} />}</td>
     </tr>
   );
 }

@@ -46,8 +46,8 @@
   --color-info: var(--bp-blue);
   --color-info-soft: var(--bp-blue-soft);
   --color-violet: var(--bp-violet);
-  --font-sans: var(--font-hind), var(--font-sora), system-ui, sans-serif;
-  --font-display: var(--font-sora), var(--font-hind), system-ui, sans-serif;
+  --font-sans: var(--font-bangla), var(--font-sora), system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-bangla), system-ui, sans-serif;
   --radius-card: 12px;
   --radius-panel: 22px;
   --shadow-soft: 0 1px 2px rgb(23 22 31 / 0.03), 0 10px 30px -18px rgb(46 16 101 / 0.18);
@@ -77,13 +77,13 @@ body {
 }
 
 body {
-  font-family: var(--font-hind), var(--font-sora), system-ui, sans-serif;
+  font-family: var(--font-bangla), var(--font-sora), system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
 /* Numbers and taka amounts use Sora (Blueprint: fonts). */
 .num {
-  font-family: var(--font-sora), system-ui, sans-serif;
+  font-family: var(--font-sora), var(--font-bangla), system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
 }
 

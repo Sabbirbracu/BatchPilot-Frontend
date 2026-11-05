@@ -34,6 +34,7 @@ export type Me = {
 };
 
 export type FeePlan = "monthly" | "course";
+export type BatchMode = "offline" | "online";
 /** monthly: one per month. admission: one-time on joining. course / installment: course-fee batches. */
 export type DueKind = "monthly" | "admission" | "course" | "installment";
 
@@ -52,6 +53,7 @@ export type Batch = {
   course_fee: number | null;
   installments: number;
   location: string | null;
+  mode: BatchMode;
   starts_on: string | null;
   archived_at: string | null;
   version: number;

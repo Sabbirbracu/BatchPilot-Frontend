@@ -12,7 +12,7 @@ import type { Me } from "@/lib/types";
 import { isActive, TAB_ITEMS, type NavItem } from "./nav-items";
 import { badgeLabel, useNavBadges } from "./use-nav-badges";
 
-/** Phone navigation: a floating bar with four tabs around a raised "+" that opens the action sheet. */
+/** Phone navigation: a floating bar with four tabs around an inline "+" that opens the action sheet. */
 export function BottomTabBar({ me }: { me: Me | undefined }) {
   const pathname = usePathname();
   const { lang, tr } = useLang();
@@ -51,15 +51,15 @@ export function BottomTabBar({ me }: { me: Me | undefined }) {
       <nav className="fixed inset-x-3 bottom-[calc(10px+env(safe-area-inset-bottom))] z-30 rounded-[26px] bg-card/95 shadow-[0_12px_40px_-12px_rgb(46_16_101/0.35)] ring-1 ring-line backdrop-blur-md md:hidden">
         <div className="mx-auto grid max-w-md grid-cols-5">
           {TAB_ITEMS.left.map(tab)}
-          <div className="flex items-start justify-center">
+          <div className="flex h-16 items-center justify-center">
             <button
               type="button"
               onClick={() => setSheet(true)}
               aria-label={tr("নতুন কাজ", "New action")}
               aria-expanded={sheet}
-              className="-mt-5 flex size-[58px] items-center justify-center rounded-[20px] bg-gradient-to-br from-violet to-purple text-white shadow-hero ring-[5px] ring-canvas transition-transform active:scale-95"
+              className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-violet to-purple text-white shadow-[0_6px_16px_-6px_rgb(91_33_182/0.6)] ring-1 ring-white/20 ring-inset transition-transform duration-150 active:scale-95"
             >
-              <Plus className="size-7" strokeWidth={2.5} />
+              <Plus className={clsx("size-6 transition-transform duration-200", sheet && "rotate-45")} strokeWidth={2.5} />
             </button>
           </div>
           {TAB_ITEMS.right.map(tab)}

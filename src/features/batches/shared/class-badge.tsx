@@ -18,7 +18,7 @@ export function ClassBadge({
     <span
       aria-hidden
       className={clsx(
-        "flex flex-none items-center justify-center font-bold [font-family:var(--font-sora),var(--font-hind)]",
+        "flex flex-none items-center justify-center font-bold [font-family:var(--font-sora),var(--font-bangla)]",
         size === "md" ? "size-10 rounded-[13px]" : "size-12 rounded-[14px]",
         /^[A-Z]+$/.test(label) ? "text-[11px]" : "text-[13px]",
         className,

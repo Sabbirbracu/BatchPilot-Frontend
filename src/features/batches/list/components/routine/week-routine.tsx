@@ -5,7 +5,7 @@ import { useLang } from "@/lib/i18n";
 import { usePortalPath } from "@/lib/portal";
 import type { Batch } from "@/lib/types";
 import { WEEK } from "../../../shared/schedule";
-import { batchTitle, batchTone } from "@/features/shared/batch-tone";
+import { batchTone } from "@/features/shared/batch-tone";
 
 /**
  * সাপ্তাহিক রুটিন: one column per day (Saturday first), each batch at its start time.
@@ -46,7 +46,7 @@ export function WeekRoutine({ batches, todayCode }: { batches: Batch[]; todayCod
                       {b.start_time ? clockShort(b.start_time, lang) : "—"}
                       {b.end_time && `–${clockShort(b.end_time, lang)}`}
                     </span>
-                    <span className="block text-[13px] leading-snug font-semibold">{batchTitle(b)}</span>
+                    <span className="block text-[13px] leading-snug font-semibold">{b.name}</span>
                     <span className="block text-[11px] text-[#6B6880]">{tr(`${num(b.student_count, lang)} জন`, `${b.student_count} students`)}</span>
                   </Link>
                 );
