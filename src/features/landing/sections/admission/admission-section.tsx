@@ -3,12 +3,12 @@ import { SectionHeading } from "../../components/section-heading";
 import { AdmissionVisual } from "./admission-visual";
 
 const STEPS = [
-  { n: "১", title: "কোর্সের জন্য একটা QR বানান", text: "HSC-র জন্য একটা, ক্লাস ১০-এর জন্য আরেকটা। লিফলেট, পোস্টার আর অফিসের দেয়ালে প্রিন্ট করুন।" },
+  { n: "১", title: "কোর্সের জন্য একটা QR বানান", text: "HSC-র জন্য একটা, ক্লাস ১০-এর জন্য আরেকটা। সাথে রেডিমেড পোস্টার — নাকি শুধু QR, আপনি বেছে নিন। লিফলেট আর দেয়ালে প্রিন্ট করুন।" },
   { n: "২", title: "স্টুডেন্ট নিজেই ব্যাচ বেছে নেবে", text: "জায়গা, সময়, ফি আর কয়টা সিট খালি — সব ফোনে দেখে আবেদন করবে। চাইলে বিকাশে টাকাও পাঠাবে।" },
   { n: "৩", title: "আপনি এক ট্যাপে ভর্তি করবেন", text: "টাকা পেলে “ভর্তি করুন” চাপুন। স্টুডেন্ট আইডি, রশিদ আর অভিভাবকের SMS নিজে নিজে চলে যাবে।" },
 ];
 
-const PERKS = ["আর্লি-বার্ড অফার ও ছাড়", "প্রতি ব্যাচে সিট লিমিট", "টাকা না দিলে সিট ৩ দিন ধরা", "কে কতবার দেখল, কে ভর্তি হলো"];
+const PERKS = ["রেডিমেড পোস্টার বা শুধু QR", "আর্লি-বার্ড অফার ও ছাড়", "প্রতি ব্যাচে সিট লিমিট", "টাকা না দিলে সিট ৩ দিন ধরা", "কে কতবার দেখল, কে ভর্তি হলো"];
 
 /** অনলাইন ভর্তি: leaflet QR → the family picks a batch → the teacher admits in one tap. */
 export function AdmissionSection() {
@@ -44,6 +44,9 @@ export function AdmissionSection() {
               </span>
             ))}
           </div>
+          <a href="#posters" className="mt-6 inline-flex items-center gap-2 text-[16px] font-bold text-[#5B21B6] hover:underline">
+            পোস্টারগুলো কেমন দেখতে, নিচে দেখুন ↓
+          </a>
         </div>
         <AdmissionVisual />
       </Container>

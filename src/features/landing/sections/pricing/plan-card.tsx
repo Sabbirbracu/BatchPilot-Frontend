@@ -32,6 +32,9 @@ export function PlanCard({ plan }: { plan: Plan }) {
       {plan.features.map((f) => (
         <CheckItem key={f.text} no={f.included === false} className={clsx("text-[16px]", f.included === false && "text-[#9E9BAD]")}>
           {f.text}
+          {f.soon && (
+            <span className={clsx("ml-1.5 inline-block rounded-[7px] px-1.5 align-[1px] text-[12px] font-bold", featured ? "bg-white/15 text-[#FFD75E]" : "bg-[#FFF7DB] text-[#B07C00]")}>শীঘ্রই</span>
+          )}
         </CheckItem>
       ))}
       {plan.tip && <p className="mt-1.5 mb-0 rounded-xl bg-[#FFF7DB] px-3 py-2 text-[14px] text-[#7A5800]">{plan.tip}</p>}

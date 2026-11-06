@@ -1,9 +1,9 @@
 /* Hero "live modules" motion graphic — values copied from the landing design (x3 artboard).
-   The stage is a fixed 600×560 canvas; FitToWidth scales it down on small screens.
+   The stage is a fixed 600×600 canvas (560 of modules plus room for the domain pill); FitToWidth scales it down on small screens.
    Global on purpose (src/*.css goes through the Tailwind loader as plain CSS, so CSS Modules
    are not scoped here): every class and keyframe carries the hm- prefix. */
 
-.hm-stage { position: relative; width: 600px; height: 560px; }
+.hm-stage { position: relative; width: 600px; height: 600px; }
 .hm-grid { position: absolute; inset: 0; background-image: radial-gradient(#D6C8F5 1.2px, transparent 1.3px); background-size: 22px 22px;
   -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 25%, transparent 70%); mask-image: radial-gradient(ellipse at 50% 50%, #000 25%, transparent 70%); }
 .hm-glow { position: absolute; left: 90px; top: 70px; width: 420px; height: 420px; border-radius: 50%;
@@ -62,6 +62,25 @@
 .hm-pill-icon { width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex: none; }
 .hm-badge { margin-left: 2px; background: #E5484D; color: #FFFFFF; font-size: 10px; font-weight: 700; border-radius: 8px; padding: 0 5px; animation: hm-badge 2s ease-in-out infinite; }
 
+.hm-fp > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hm-swap-a { animation: hm-swap-a 6s ease-in-out infinite; }
+.hm-swap-b { opacity: 0; animation: hm-swap-b 6s ease-in-out infinite; }
+
+.hm-live-dot { width: 10px; height: 10px; border-radius: 50%; background: #F04438; box-shadow: 0 0 0 0 rgba(240,68,56,.6); animation: hm-live 1.6s ease-out infinite; }
+.hm-live { margin-left: 2px; background: #F04438; color: #FFFFFF; font-size: 9.5px; font-weight: 800; letter-spacing: .04em; border-radius: 6px; padding: 1px 5px; }
+
+.hm-domain { padding: 6px 8px 6px 6px; gap: 9px; border-radius: 17px;
+  box-shadow: 0 0 0 1px #E4DAFA, 0 18px 34px -16px rgba(91,33,182,.55); }
+.hm-domain-logo { width: 34px; height: 34px; border-radius: 11px; flex: none; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, #F5B800, #E09A00); color: #2E1065; font-size: 17px; font-weight: 800; }
+.hm-domain-text { display: flex; flex-direction: column; line-height: 1.15; }
+.hm-domain-label { font-size: 10.5px; font-weight: 600; color: #6B6880; }
+.hm-domain-url { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 700; color: #17161F;
+  font-family: var(--font-sora), sans-serif; letter-spacing: -.01em; }
+.hm-domain-type { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: 0; animation: hm-domain 8s steps(12, end) infinite; }
+.hm-domain-ok { margin-left: 2px; background: #ECFDF3; color: #039855; font-size: 11px; font-weight: 700; border-radius: 8px; padding: 2px 7px;
+  opacity: 0; animation: hm-domain-ok 8s ease-out infinite; }
+
 @keyframes hm-spin { to { transform: rotate(360deg); } }
 @keyframes hm-flow { to { stroke-dashoffset: -20; } }
 @keyframes hm-pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.7); opacity: 0; } }
@@ -80,11 +99,19 @@
 @keyframes hm-hi { 0% { box-shadow: 0 0 0 1px #EEE9FA, 0 14px 28px -16px rgba(46,16,101,.45); } 5%, 20% { box-shadow: 0 0 0 2px #8B5CF6, 0 18px 30px -14px rgba(91,33,182,.5); } 26%, 100% { box-shadow: 0 0 0 1px #EEE9FA, 0 14px 28px -16px rgba(46,16,101,.45); } }
 @keyframes hm-badge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
 
+@keyframes hm-swap-a { 0%, 42% { opacity: 1; } 50%, 92% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes hm-swap-b { 0%, 42% { opacity: 0; } 50%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes hm-live { 0% { box-shadow: 0 0 0 0 rgba(240,68,56,.55); } 100% { box-shadow: 0 0 0 8px rgba(240,68,56,0); } }
+@keyframes hm-domain { 0%, 8% { width: 0; } 34%, 92% { width: 6.6em; } 100% { width: 0; } }
+@keyframes hm-domain-ok { 0%, 36% { opacity: 0; transform: scale(.8); } 42%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
 @media (prefers-reduced-motion: reduce) {
   .hm-stage * { animation: none !important; }
   .hm-row:first-child, .hm-option, .hm-generated, .hm-done { opacity: 1; }
   .hm-ok-wrap, .hm-pop { transform: none; }
-  .hm-question span { width: auto; }
+  .hm-question span, .hm-domain-type { width: auto; }
+  .hm-domain-ok { opacity: 1; }
+  .hm-swap-b { opacity: 0; }
   .hm-sending { opacity: 0; }
   .hm-svg circle { display: none; }
 }

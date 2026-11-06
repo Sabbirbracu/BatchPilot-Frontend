@@ -4,7 +4,7 @@ export type Plan = {
   price: string;
   unit: string;
   note: string;
-  features: { text: string; included?: boolean }[];
+  features: { text: string; included?: boolean; soon?: boolean }[];
   cta: string;
   highlight?: string; // ribbon on the featured plan
   tip?: string;
@@ -18,7 +18,7 @@ export const PLANS: Plan[] = [
     unit: "/মাস",
     note: "৩০০ জন স্টুডেন্ট পর্যন্ত",
     features: [
-      { text: "ফিঙ্গারপ্রিন্ট হাজিরা" },
+      { text: "আঙুল বা কার্ডে হাজিরা" },
       { text: "ফি ও বকেয়ার হিসাব" },
       { text: "অভিভাবককে হাজিরার SMS" },
       { text: "১ জন সহকারীর লগইন" },
@@ -38,11 +38,12 @@ export const PLANS: Plan[] = [
     features: [
       { text: "Basic-এর সব কিছু" },
       { text: "স্টুডেন্টের কোনো লিমিট নেই" },
-      { text: "বকেয়ার অটো রিমাইন্ডার" },
-      { text: "ডায়েরির ছবি থেকে ইমপোর্ট" },
+      { text: "বকেয়ার অটো রিমাইন্ডার", soon: true },
       { text: "“মনোযোগ দরকার” রিপোর্ট" },
-      { text: "পরীক্ষা, রেজাল্ট ও মেধাক্রম" },
-      { text: "নিজের ওয়েবসাইট · যত খুশি সহকারী" },
+      { text: "যত খুশি সহকারী" },
+      { text: "ডায়েরির ছবি থেকে ইমপোর্ট", soon: true },
+      { text: "পরীক্ষা, রেজাল্ট ও মেধাক্রম", soon: true },
+      { text: "নিজের ওয়েবসাইট", soon: true },
     ],
     cta: "ফ্রি ডেমো বুক করুন →",
   },
@@ -56,7 +57,7 @@ export const PLANS: Plan[] = [
       { text: "Pro-র সব কিছু" },
       { text: "স্টুডেন্ট যতই হোক, দাম একই" },
       { text: "একাধিক শাখা এক জায়গা থেকে" },
-      { text: "নিজের ডোমেইন (yourcoaching.com)" },
+      { text: "নিজের ডোমেইন (yourcoaching.com)", soon: true },
       { text: "অগ্রাধিকার সাপোর্ট" },
     ],
     tip: "১,০০০+ স্টুডেন্ট হলে সবচেয়ে লাভজনক",

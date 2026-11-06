@@ -1,4 +1,4 @@
-import { FingerprintIcon } from "../../../components/icons";
+import { CardIcon, FingerprintIcon } from "../../../components/icons";
 import { MotionCard } from "./motion-card";
 import { TickerRow, type TickerEntry } from "./ticker-row";
 
@@ -8,19 +8,24 @@ const SCANS: (TickerEntry & { time: string })[] = [
   { letter: "ন", bg: "#BFF0D6", fg: "#05603A", name: "নুসরাত", time: "১০:০৬" },
 ];
 
-/** Fingerprint being scanned while students check in one after another. */
+/** Fingerprint, then card, being read while students check in one after another. */
 export function AttendanceCard() {
   return (
     <MotionCard
       left={5}
       top={61}
-      label="হাজিরা"
+      label="আঙুল / কার্ডে হাজিরা"
       labelColor="#039855"
       labelIcon={<FingerprintIcon size={12} strokeWidth={2.4} />}
       bodyClassName="flex items-center gap-2.5"
     >
       <div className="hm-fp">
-        <FingerprintIcon size={22} strokeWidth={1.9} />
+        <span className="hm-swap-a">
+          <FingerprintIcon size={22} strokeWidth={1.9} />
+        </span>
+        <span className="hm-swap-b">
+          <CardIcon size={22} strokeWidth={1.9} />
+        </span>
         <i className="hm-scan" />
       </div>
       <div className="relative h-[30px] flex-1">

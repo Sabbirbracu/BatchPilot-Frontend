@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { HeaderButton } from "@/components/ui";
 import { pick } from "@/features/shared/preview/text";
 import { useSoon } from "@/features/shared/preview/use-soon";
-import { num, taka } from "@/lib/format";
+import { taka } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
 import { PLANS } from "../sample";
 
@@ -25,13 +25,9 @@ export function PlanList({ current }: { current: string }) {
             </div>
             <p className="num m-0">
               <span className="text-[26px] font-bold">{taka(p.price * 100, lang)}</span>
-              <span className="text-[13px] text-muted">{tr("/মাস", "/month")}</span>
+              <span className="text-[13px] text-muted">{pick(p.unit, lang)}</span>
             </p>
-            <p className="num m-0 text-[13px] text-muted">
-              {p.students == null ? tr("স্টুডেন্ট সীমা নেই", "Unlimited students") : tr(`${num(p.students, lang)} স্টুডেন্ট`, `${p.students} students`)}
-              {" · "}
-              {tr(`${num(p.sms, lang)} SMS/মাস`, `${num(p.sms, lang)} SMS/month`)}
-            </p>
+            <p className="m-0 text-[13px] text-muted">{pick(p.limit, lang)}</p>
             <ul className="m-0 list-none space-y-1.5 p-0">
               {p.features.map((f) => (
                 <li key={f.en} className="flex items-start gap-2 text-[13.5px]">

@@ -226,3 +226,28 @@ export const PinIcon = (p: IconProps) => (
     <circle cx="12" cy="10" r="2.5" />
   </Line>
 );
+
+// Icons for the devices and platform sections.
+
+export const CardIcon = (p: IconProps) => (
+  <Line {...p}>
+    <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+    <circle cx="8" cy="11" r="2" />
+    <path d="M5 16a3 3 0 0 1 6 0M14 10h4M14 13.5h3" />
+  </Line>
+);
+
+export const TapIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M8.5 8.5a5 5 0 0 1 7 0M6 6a8.5 8.5 0 0 1 12 0" />
+    <circle cx="12" cy="12" r="1" />
+    <rect x="7" y="15" width="10" height="6" rx="1.5" />
+  </Line>
+);
+
+export const ShieldIcon = (p: IconProps) => (
+  <Line {...p}>
+    <path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6z" />
+    <path d="m9 12 2 2 4-4" />
+  </Line>
+);

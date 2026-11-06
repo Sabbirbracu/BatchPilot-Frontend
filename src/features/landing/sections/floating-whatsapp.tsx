@@ -1,7 +1,9 @@
 import { WhatsAppIcon } from "../components/icons";
-import { whatsappHref } from "../content/contact";
+import { whatsappHref, WHATSAPP_NUMBER } from "../content/contact";
 
+/** Shown once there is a WhatsApp number to chat with. */
 export function FloatingWhatsApp() {
+  if (!WHATSAPP_NUMBER) return null;
   return (
     <a
       href={whatsappHref}

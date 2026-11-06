@@ -1,18 +1,18 @@
 import type { T } from "@/features/shared/preview/text";
 
-export type Plan = { key: string; name: T; price: number; students: number | null; sms: number; features: T[] }; // students null = no limit
+export type Plan = { key: string; name: T; price: number; unit: T; limit: T; features: T[] };
 
-// Example plans and prices until billing is set up.
+// The same plans and prices as the landing page (features/landing/content/pricing.ts). Keep the two in step.
 export const PLANS: Plan[] = [
-  { key: "starter", name: { bn: "স্টার্টার", en: "Starter" }, price: 499, students: 100, sms: 500, features: [{ bn: "ফি, বকেয়া, হাজিরা", en: "Fees, dues, attendance" }, { bn: "অভিভাবককে অটো SMS", en: "Automatic guardian SMS" }, { bn: "১ জন অ্যাসিস্ট্যান্ট", en: "1 assistant" }] },
-  { key: "pro", name: { bn: "প্রো", en: "Pro" }, price: 999, students: 300, sms: 1500, features: [{ bn: "স্টার্টারের সবকিছু", en: "Everything in Starter" }, { bn: "পরীক্ষা, প্রশ্ন ব্যাংক, OMR", en: "Exams, question bank, OMR" }, { bn: "নিজের ওয়েবসাইট", en: "Your own website" }, { bn: "৫ জন স্টাফ", en: "5 staff" }] },
-  { key: "premium", name: { bn: "প্রিমিয়াম", en: "Premium" }, price: 1999, students: null, sms: 4000, features: [{ bn: "প্রো-র সবকিছু", en: "Everything in Pro" }, { bn: "অনলাইন ক্লাস ও কোর্স", en: "Online classes and courses" }, { bn: "নিজের ডোমেইন", en: "Custom domain" }, { bn: "স্টাফ সীমা নেই", en: "Unlimited staff" }] },
+  { key: "basic", name: { bn: "Basic", en: "Basic" }, price: 1200, unit: { bn: "/মাস", en: "/month" }, limit: { bn: "৩০০ জন স্টুডেন্ট পর্যন্ত", en: "Up to 300 students" }, features: [{ bn: "আঙুল বা কার্ডে হাজিরা", en: "Fingerprint or card attendance" }, { bn: "ফি ও বকেয়ার হিসাব", en: "Fees and dues" }, { bn: "অভিভাবককে হাজিরার SMS", en: "Attendance SMS to guardians" }, { bn: "১ জন সহকারী", en: "1 assistant" }] },
+  { key: "pro", name: { bn: "Pro", en: "Pro" }, price: 5, unit: { bn: " / স্টুডেন্ট / মাস", en: " / student / month" }, limit: { bn: "স্টুডেন্টের লিমিট নেই", en: "No student limit" }, features: [{ bn: "Basic-এর সব কিছু", en: "Everything in Basic" }, { bn: "“মনোযোগ দরকার” রিপোর্ট", en: "“Needs attention” report" }, { bn: "যত খুশি সহকারী", en: "Unlimited assistants" }, { bn: "পরীক্ষা ও নিজের ওয়েবসাইট (শীঘ্রই)", en: "Exams and your own website (soon)" }] },
+  { key: "pro-plus", name: { bn: "Pro Plus", en: "Pro Plus" }, price: 4999, unit: { bn: "/মাস", en: "/month" }, limit: { bn: "আনলিমিটেড স্টুডেন্ট", en: "Unlimited students" }, features: [{ bn: "Pro-র সব কিছু", en: "Everything in Pro" }, { bn: "একাধিক শাখা এক জায়গা থেকে", en: "Several branches in one place" }, { bn: "নিজের ডোমেইন (শীঘ্রই)", en: "Your own domain (soon)" }, { bn: "অগ্রাধিকার সাপোর্ট", en: "Priority support" }] },
 ];
 
 export const USAGE = [
   { key: "students", label: { bn: "স্টুডেন্ট", en: "Students" }, used: 141, limit: 300 },
   { key: "sms", label: { bn: "এই মাসের SMS", en: "SMS this month" }, used: 620, limit: 1500 },
-  { key: "staff", label: { bn: "স্টাফ", en: "Staff" }, used: 2, limit: 5 },
+  { key: "staff", label: { bn: "সহকারী", en: "Assistants" }, used: 1, limit: 3 },
 ];
 
 export const INVOICES = [
