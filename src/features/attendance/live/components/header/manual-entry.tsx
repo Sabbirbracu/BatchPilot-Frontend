@@ -14,10 +14,10 @@ export function ManualEntry({ batchId, demo, compact }: { batchId: string | null
   const to = usePortalPath();
   const toast = useToast();
   const className = compact
-    ? "flex size-[46px] flex-none items-center justify-center rounded-full bg-[linear-gradient(135deg,#7C3AED,#5B21B6)] text-white shadow-[0_10px_22px_-8px_rgba(91,33,182,.7)] active:scale-95"
+    ? "flex size-10 flex-none items-center justify-center rounded-full bg-[linear-gradient(135deg,#7C3AED,#5B21B6)] text-white shadow-[0_10px_22px_-8px_rgba(91,33,182,.7)] active:scale-95"
     : "flex items-center gap-2 rounded-[14px] bg-[linear-gradient(135deg,#7C3AED,#5B21B6)] px-4 py-2.5 text-[14px] font-bold whitespace-nowrap text-white shadow-[0_6px_16px_-6px_rgba(91,33,182,.55)] hover:brightness-110";
   const body = compact ? (
-    <PenLine className="size-5" />
+    <PenLine className="size-[18px]" />
   ) : (
     <>
       <Plus className="size-[18px]" strokeWidth={2.2} />

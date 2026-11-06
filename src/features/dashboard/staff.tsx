@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { AppHeader } from "@/components/layout/app-header";
 import { Card, ErrorBox, PageLoader } from "@/components/ui";
 import { api } from "@/lib/api";
 import { useMe } from "@/lib/auth";
@@ -25,7 +26,7 @@ export default function StaffDashboard() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-xl font-bold">{tr(`শুভেচ্ছা, ${name}`, `Hello, ${name}`)}</h1>
+      <AppHeader eyebrow={tr("শুভেচ্ছা 👋", "Hello 👋")} title={name} />
       <QuickActions />
       {isLoading ? (
         <PageLoader />

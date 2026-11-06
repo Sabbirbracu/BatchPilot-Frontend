@@ -15,9 +15,9 @@ export function DatePill({ date }: { date: string }) {
     <button
       type="button"
       onClick={() => toast("অন্য দিনের হাজিরা দেখা শীঘ্রই আসছে")}
-      className="flex h-11 items-center gap-2 rounded-[22px] bg-white px-4 text-[16px] font-semibold text-[#17161F] shadow-[0_1px_2px_rgba(23,22,31,.04)] md:h-auto md:rounded-[14px] md:px-3.5 md:py-2.5 md:text-[14px] md:shadow-none"
+      className="flex h-10 items-center gap-1.5 rounded-full bg-white px-3.5 text-[15px] font-semibold text-[#17161F] shadow-[0_1px_2px_rgba(23,22,31,.04)] md:h-auto md:rounded-[14px] md:px-3.5 md:py-2.5 md:text-[14px] md:shadow-none"
     >
-      <CalendarDays className="size-5 text-[#5B21B6] md:size-[18px]" />
+      <CalendarDays className="size-[18px] text-[#5B21B6]" />
       <span>
         আজ<span className="hidden lg:inline">, {DAYS[d.getDay()]} {digits(d.getDate(), "bn")} {MONTHS[d.getMonth()]}</span>
       </span>

@@ -1,3 +1,4 @@
+import { AppHeader } from "@/components/layout/app-header";
 import { HeaderButton, PrimaryLink } from "@/components/ui";
 import { useLang } from "@/lib/i18n";
 import { usePortalPath } from "@/lib/portal";
@@ -17,12 +18,12 @@ export function StudentsHeader({
   const { tr } = useLang();
   const to = usePortalPath();
   return (
-    <header className="flex flex-wrap items-center gap-3">
-      <div className="min-w-0 flex-1">
-        <h1 className="m-0 text-[25px] font-bold">{tr("স্টুডেন্ট", "Students")}</h1>
-        <p className="m-0 text-[14px] text-[#6B6880]">{subtitle}</p>
-      </div>
-      <div className="flex flex-wrap items-center gap-3 max-md:w-full">
+    <AppHeader
+      title={tr("স্টুডেন্ট", "Students")}
+      subtitle={subtitle}
+      toolbarInline="lg"
+      toolbar={
+        <>
         <HeaderButton disabled title={tr("শীঘ্রই আসছে", "Coming soon")} className="max-md:hidden">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B07C00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <rect x="3" y="6" width="18" height="14" rx="3" />
@@ -46,7 +47,8 @@ export function StudentsHeader({
             {tr("নতুন ভর্তি", "New admission")}
           </PrimaryLink>
         )}
-      </div>
-    </header>
+        </>
+      }
+    />
   );
 }

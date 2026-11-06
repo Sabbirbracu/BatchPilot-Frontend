@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AppHeader } from "@/components/layout/app-header";
 import { HeaderButton, type MenuItem, MoreMenu, PrimaryLink } from "@/components/ui";
 import { digits } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
@@ -25,14 +26,11 @@ export function ProfileHeader({
   const to = usePortalPath();
   const left = s.status === "left";
   return (
-    <header className="flex flex-wrap items-center gap-3">
-      <Link href={to("/students")} aria-label={tr("স্টুডেন্ট তালিকায় ফিরুন", "Back to students")} className={`${whiteBtn} w-[42px] text-[#3B3850]`}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <path d="M15 6l-6 6 6 6" />
-        </svg>
-      </Link>
-      <div className="min-w-0 flex-1">
-        <p className="m-0 truncate text-[13px] text-[#9E9BAD]">
+    <AppHeader
+      back={to("/students")}
+      backLabel={tr("স্টুডেন্ট তালিকায় ফিরুন", "Back to students")}
+      eyebrow={
+        <>
           <Link href={to("/students")} className="text-[#6B6880]">
             {tr("স্টুডেন্ট", "Students")}
           </Link>
@@ -40,18 +38,22 @@ export function ProfileHeader({
             {" / "}
             {tr("আইডি", "ID")} {digits(s.student_code, lang)}
           </span>
-        </p>
-        <h1 className="m-0 flex flex-wrap items-center gap-x-2.5 text-[20px] font-bold md:text-[24px]">
+        </>
+      }
+      title={
+        <>
           <span className="min-w-0 truncate">{s.name}</span>
           <span
-            className="rounded-[9px] px-[9px] py-0.5 text-[12px] font-bold"
+            className="flex-none rounded-[9px] px-[9px] py-0.5 text-[12px] font-bold"
             style={left ? { background: "#F3F1FA", color: "#6B6880" } : { background: "#ECFDF3", color: "#039855" }}
           >
             {left ? tr("ছেড়ে দিয়েছে", "Left") : tr("চালু", "Active")}
           </span>
-        </h1>
-      </div>
-      <div className="flex items-center gap-3 max-md:w-full max-md:justify-end">
+        </>
+      }
+      toolbarAlign="end"
+      toolbar={
+        <>
         {canEdit && (
           <HeaderButton onClick={onEdit}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5B21B6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -73,7 +75,8 @@ export function ProfileHeader({
             {tr("ফি নিন", "Collect fee")}
           </PrimaryLink>
         )}
-      </div>
-    </header>
+        </>
+      }
+    />
   );
 }

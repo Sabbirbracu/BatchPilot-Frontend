@@ -3,7 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { PaymentList } from "@/components/payment-list";
-import { Card, Empty, Input, PageHeader, PageLoader } from "@/components/ui";
+import { AppHeader } from "@/components/layout/app-header";
+import { Card, Empty, Input, PageLoader } from "@/components/ui";
 import { api } from "@/lib/api";
 import { can, useMe } from "@/lib/auth";
 import { num, taka } from "@/lib/format";
@@ -29,7 +30,8 @@ export default function PaymentsPage() {
 
   return (
     <div>
-      <PageHeader
+      <AppHeader
+        className="mb-4"
         title={tr("আদায়ের হিসাব", "Payments")}
         subtitle={isOwner ? undefined : tr("শুধু আপনার আজকের এন্ট্রি", "Only your entries today")}
       />

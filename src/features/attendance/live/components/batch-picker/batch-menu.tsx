@@ -37,7 +37,7 @@ export function BatchMenu({
           aria-expanded={open}
           aria-label={`ব্যাচ: ${current.label}`}
           className={clsx(
-            "flex max-w-[300px] items-center gap-2 rounded-[14px] bg-white px-3.5 py-2.5 text-[14px] font-semibold whitespace-nowrap text-[#17161F] transition-shadow hover:text-[#5B21B6]",
+            "flex max-w-[220px] items-center lg:max-w-[300px] gap-2 rounded-[14px] bg-white px-3.5 py-2.5 text-[14px] font-semibold whitespace-nowrap text-[#17161F] transition-shadow hover:text-[#5B21B6]",
             open && "ring-2 ring-[#5B21B6]/25",
           )}
         >

@@ -4,7 +4,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { UserRoundPlus } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { ErrorBox, PageLoader } from "@/components/ui";
+import { AppHeader } from "@/components/layout/app-header";
+import { ErrorBox, PageLoader, PrimaryLink } from "@/components/ui";
 import { api } from "@/lib/api";
 import { can, useMe } from "@/lib/auth";
 import { useHydrated } from "@/lib/clock";
@@ -62,20 +63,16 @@ function Admissions() {
 
   return (
     <div className="space-y-4 text-[#17161F] [line-height:normal]">
-      <header className="flex flex-wrap items-center gap-3">
-        <div className="min-w-0 flex-1 basis-[240px]">
-          <h1 className="m-0 text-[28px] font-bold">{tr("ভর্তি", "Admissions")}</h1>
-          <p className="m-0 text-[15px] text-[#6B6880]">{tr("QR থেকে আসা আবেদন, আর অফিসে নতুন ভর্তি", "Requests from your QR, and admissions at the desk")}</p>
-        </div>
-        <button
-          type="button"
-          onClick={() => router.push(to("/admissions/new"))}
-          className="flex h-[52px] items-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#7C3AED,#5B21B6)] px-5 text-[15px] font-bold text-white shadow-[0_10px_24px_-10px_rgba(91,33,182,.6)] hover:brightness-110"
-        >
-          <UserRoundPlus className="size-5" />
-          {tr("নতুন ভর্তি", "New admission")}
-        </button>
-      </header>
+      <AppHeader
+        title={tr("ভর্তি", "Admissions")}
+        subtitle={<span className="hidden md:inline">{tr("QR থেকে আসা আবেদন, আর অফিসে নতুন ভর্তি", "Requests from your QR, and admissions at the desk")}</span>}
+        actions={
+          <PrimaryLink href={to("/admissions/new")}>
+            <UserRoundPlus className="size-[18px]" />
+            {tr("নতুন ভর্তি", "New admission")}
+          </PrimaryLink>
+        }
+      />
       <StatsRow data={overview.data} />
       <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px]">
         <section className="min-w-0 space-y-3">

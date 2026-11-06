@@ -1,3 +1,4 @@
+import { AppHeader } from "@/components/layout/app-header";
 import { HeaderButton } from "@/components/ui";
 import { monthLabel, num } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
@@ -9,14 +10,17 @@ export function FeesHeader({ month, current, onMonth, dueStudents }: { month: st
   const { tr, lang } = useLang();
   const to = usePortalPath();
   return (
-    <header className="flex flex-wrap items-center gap-2.5">
-      <div className="min-w-0 flex-1 basis-[260px]">
-        <h1 className="m-0 text-[25px] font-bold">{tr("ফি", "Fees")}</h1>
-        <p className="m-0 text-[14px] text-[#6B6880]">
-          {monthLabel(month, lang, true)} · {tr("টাকা সরাসরি আপনার কাছে, রশিদ যায় অভিভাবকের ফোনে", "money comes straight to you, the receipt goes to the guardian's phone")}
-        </p>
-      </div>
-      <div className="flex flex-wrap items-center gap-2.5">
+    <AppHeader
+      title={tr("ফি", "Fees")}
+      subtitle={
+        <>
+          {monthLabel(month, lang, true)}
+          <span className="hidden md:inline"> · {tr("টাকা সরাসরি আপনার কাছে, রশিদ যায় অভিভাবকের ফোনে", "money comes straight to you, the receipt goes to the guardian's phone")}</span>
+        </>
+      }
+      toolbarInline="lg"
+      toolbar={
+        <>
         <MonthSelect value={month} current={current} onChange={onMonth} />
         <HeaderButton href={to("/fees/dues")} className="text-[#D92D20] hover:text-[#D92D20]">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -32,7 +36,8 @@ export function FeesHeader({ month, current, onMonth, dueStudents }: { month: st
           </svg>
           {tr("রিপোর্ট", "Report")}
         </HeaderButton>
-      </div>
-    </header>
+        </>
+      }
+    />
   );
 }

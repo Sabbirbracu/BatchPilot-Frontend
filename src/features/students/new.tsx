@@ -4,7 +4,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { Button, Card, ErrorBox, Field, Input, PageHeader, PageLoader } from "@/components/ui";
+import { AppHeader } from "@/components/layout/app-header";
+import { Button, Card, ErrorBox, Field, Input, PageLoader } from "@/components/ui";
 import { api, ApiError } from "@/lib/api";
 import { can, useMe } from "@/lib/auth";
 import { taka, toPoisha } from "@/lib/format";
@@ -66,7 +67,7 @@ function NewStudent() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <PageHeader back={to("/students")} title={tr("নতুন স্টুডেন্ট", "New student")} />
+      <AppHeader className="mb-5" back={to("/students")} title={tr("নতুন স্টুডেন্ট", "New student")} />
       <form onSubmit={(e) => submit(e)} className="space-y-5">
         <Card className="space-y-4 p-5">
           <Field label={tr("নাম", "Name")}>

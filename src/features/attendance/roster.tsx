@@ -5,7 +5,8 @@ import clsx from "clsx";
 import { CheckCircle2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Button, Card, ErrorBox, Input, PageHeader, PageLoader } from "@/components/ui";
+import { AppHeader } from "@/components/layout/app-header";
+import { Button, Card, ErrorBox, Input, PageLoader } from "@/components/ui";
 import { api } from "@/lib/api";
 import { digits, num, timeLabel } from "@/lib/format";
 import { useTodayISO } from "@/lib/clock";
@@ -83,7 +84,8 @@ function RosterPageInner() {
 
   return (
     <div className="mx-auto max-w-2xl pb-24 md:pb-0">
-      <PageHeader
+      <AppHeader
+        className="mb-5"
         back={to("/attendance")}
         title={r.batch_name}
         subtitle={
@@ -91,7 +93,8 @@ function RosterPageInner() {
             ? tr(`নেওয়া হয়েছে${r.taken_by_name ? ` — ${r.taken_by_name}` : ""}, ${r.taken_at ? timeLabel(r.taken_at, lang) : ""}`, `Taken${r.taken_by_name ? ` by ${r.taken_by_name}` : ""}`)
             : tr("সবাই উপস্থিত ধরা আছে — শুধু অনুপস্থিতদের ট্যাপ করুন", "Everyone is present by default — tap only the absent")
         }
-        action={
+        toolbarAlign="end"
+        toolbar={
           <Input
             type="date"
             className="h-10 w-40 text-sm"

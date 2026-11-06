@@ -10,7 +10,6 @@ export { ErrorBox, errorText } from "./error-box";
 export { Field } from "./field";
 export { IconTile, type Tone } from "./icon-tile";
 export { Input, inputClass, Select, Textarea } from "./input";
-export { PageHeader } from "./page-header";
 export { Panel, PanelHeader } from "./panel";
 export { ProgressBar } from "./progress-bar";
 export { ProgressRing } from "./progress-ring";

@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useDebounced } from "@/components/student-search";
-import { Button, Card, Empty, ErrorBox, Input, PageHeader, PageLoader, Select } from "@/components/ui";
+import { AppHeader } from "@/components/layout/app-header";
+import { Button, Card, Empty, ErrorBox, Input, PageLoader, Select } from "@/components/ui";
 import { api } from "@/lib/api";
 import { dateLabel, digits, monthLabel, num, taka } from "@/lib/format";
 import { useLang } from "@/lib/i18n";
@@ -57,7 +58,8 @@ function Dues() {
 
   return (
     <div>
-      <PageHeader
+      <AppHeader
+        className="mb-4"
         title={tr("বকেয়া তালিকা", "Dues")}
         subtitle={
           dues.data && (

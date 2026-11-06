@@ -3,8 +3,7 @@
 import { ErrorBox } from "@/components/ui";
 import { AttentionPanel } from "./components/attention/attention-panel";
 import { DashboardSkeleton } from "./components/dashboard-skeleton";
-import { DashboardHeader } from "./components/header/dashboard-header";
-import { MobileHomeHeader } from "./components/header/mobile-home-header";
+import { HomeHeader } from "./components/header/home-header";
 import { LiveAttendance } from "./components/live-attendance/live-attendance";
 import { LiveClassCard } from "./components/live-class/live-class-card";
 import { QuickTiles } from "./components/quick-tiles/quick-tiles";
@@ -28,9 +27,8 @@ export default function TeacherDashboard() {
   const header = { name: ownerName, date: d.date, classCount: d.today_classes.length + MOCK.exams.length, now };
   return (
     <div>
-      <MobileHomeHeader {...header} />
-      <DashboardHeader {...header} />
-      <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-4 md:mt-5 xl:grid-cols-[minmax(0,1.22fr)_minmax(0,1fr)_minmax(250px,0.62fr)] xl:gap-5">
+      <HomeHeader {...header} />
+      <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-4 md:mt-3 xl:grid-cols-[minmax(0,1.22fr)_minmax(0,1fr)_minmax(250px,0.62fr)] xl:gap-5">
         <LiveClassCard focus={pickFocusClass(d.today_classes, now)} className="xl:col-start-1 xl:row-start-1" />
         <QuickTiles className="xl:hidden" />
         <StatsGrid data={d} remindersOn={remindersOn} className="xl:col-start-2 xl:row-start-1" />
